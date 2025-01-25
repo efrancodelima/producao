@@ -75,7 +75,7 @@ public class FazerCheckoutService {
     var responseBody = response.getBody();
 
     if (response.getStatusCode() == HttpStatus.OK && responseBody != null) {
-      return responseBody.getData();
+      return responseBody.getBody();
 
     } else {
       throw new BadGatewayException(BadGatewayMessage.PRODUCAO);

@@ -22,11 +22,11 @@ public class CodigosProdutosValidator {
     for (Long codigo : codigoProdutos) {
 
       if (codigo == null) {
-        throw new BadRequestException(BadRequestMessage.COD_PROD_NULL);
+        throw new BadRequestException(BadRequestMessage.PROD_COD_NULO);
       }
 
       if (codigo < 1) {
-        throw new BadRequestException(BadRequestMessage.COD_PROD_MIN);
+        throw new BadRequestException(BadRequestMessage.PROD_COD_MIN);
       }
     }
   }

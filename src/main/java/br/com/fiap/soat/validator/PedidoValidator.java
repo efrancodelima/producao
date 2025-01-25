@@ -79,7 +79,7 @@ public class PedidoValidator {
       }
 
       if (item.getCodigoProduto() == null || item.getCodigoProduto() < 1) {
-        throw new BadRequestException(BadRequestMessage.COD_PROD_NULL);
+        throw new BadRequestException(BadRequestMessage.PROD_COD_NULO);
       }
     }
 
@@ -107,9 +107,9 @@ public class PedidoValidator {
     var responseBody = response.getBody();
 
     if (response.getStatusCode() == HttpStatus.OK
-        && responseBody != null && !responseBody.getData().isEmpty()) {
+        && responseBody != null && !responseBody.getBody().isEmpty()) {
 
-      return responseBody.getData();
+      return responseBody.getBody();
 
     } else {
       throw new BadGatewayException(BadGatewayMessage.PRODUCAO);

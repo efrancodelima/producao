@@ -1,11 +1,10 @@
 package br.com.fiap.soat.validator;
 
-import br.com.fiap.soat.dto.ClienteDto;
 import br.com.fiap.soat.dto.ProdutoDto;
+import br.com.fiap.soat.entity.CategoriaProduto;
 import br.com.fiap.soat.exception.BadRequestException;
 import br.com.fiap.soat.exception.messages.BadRequestMessage;
-import java.util.ArrayList;
-import java.util.regex.Pattern;
+import java.math.BigDecimal;
 
 /**
  * Responsável por validar um objeto ProdutoDto.
@@ -21,69 +20,63 @@ public class ProdutoValidator {
    * @throws BadRequestException Exceção do tipo bad request lançada durante a validação.
    */
   public static void validar(ProdutoDto produtoDto) throws BadRequestException {
-    
-    if (isNullOrEmpty(produtoDto.getNome()) && isNullOrEmpty(produtoDto.getEmail())) {
-      throw new BadRequestException(BadRequestMessage.NOME_EMAIL_NULL);
+
+    if (produtoDto == null) {
+      throw new BadRequestException(BadRequestMessage.PROD_NULO);
     }
-    
-    CpfValidator.validar(produtoDto.getCpf());
+
     validarNome(produtoDto.getNome());
-    validarEmail(produtoDto.getEmail());
+    validarDescricao(produtoDto.getDescricao());
+    validarPreco(produtoDto.getPreco());
+    validarCategoria(produtoDto.getCategoria());
   }
 
   private static void validarNome(String nome) throws BadRequestException {
 
-    if (!isNullOrEmpty(nome)) {
+    nome = nome.trim();
 
-      // Verifica o limite de caracteres
-      if (nome.length() > 50) {
-        throw new BadRequestException(BadRequestMessage.NOME_MAX);
-      }
-      
-      // Verifica as palavras
-      var palavras = getListaPalavras(nome, 3);
-            
-      if (palavras.isEmpty()) {
-        throw new BadRequestException(BadRequestMessage.NOME_INVALIDO);
-      }
-    }
-  }
-
-  private static void validarEmail(String email) throws BadRequestException {
-
-    if (!isNullOrEmpty(email)) {
-      
-      // Verifica o limite de caracteres
-      if (email.length() > 40) {
-        throw new BadRequestException(BadRequestMessage.EMAIL_MAX);
-      }
-      
-      // Verifica o pattern
-      String emailRegexRfc5322 = "^[a-zA-Z0-9_!#$%&’*+/=?`{|}~^.-]+@[a-zA-Z0-9.-]+$";
-      Pattern pattern = Pattern.compile(emailRegexRfc5322);
-        
-      if (!pattern.matcher(email).matches()) {
-        throw new BadRequestException(BadRequestMessage.EMAIL_INVALIDO);
-      }
-    } 
-  }
-  
-  private static ArrayList<String> getListaPalavras(String texto, int minChar) {
-
-    String[] palavras = texto.split(" ");
-    ArrayList<String> palavrasValidas = new ArrayList<>();
-
-    for (String palavra : palavras) {
-      if (palavra.length() >= minChar) {
-        palavrasValidas.add(palavra);
-      }
-    }
+    if (nome == null || nome.isEmpty()) {
+      throw new BadRequestException(BadRequestMessage.PROD_NOME_NULO);
     
-    return palavrasValidas;
+    } else if (nome.length() < 5) {
+      throw new BadRequestException(BadRequestMessage.PROD_NOME_MIN);
+    
+    } else if (nome.length() > 20) {
+      throw new BadRequestException(BadRequestMessage.PROD_NOME_MAX);
+    }
   }
 
-  private static boolean isNullOrEmpty(String str) {
-    return str == null || str.trim().isEmpty();
+  private static void validarDescricao(String descricao) throws BadRequestException {
+    if (descricao != null) {
+      
+      if (descricao.length() < 20) {
+        throw new BadRequestException(BadRequestMessage.PROD_DESC_MIN);
+      
+      } else if (descricao.length() > 150) {
+        throw new BadRequestException(BadRequestMessage.PROD_DESC_MAX);
+      }
+    }
   }
 
+  private static void validarPreco(BigDecimal preco) throws BadRequestException {
+    
+    if (preco == null) {
+      throw new BadRequestException(BadRequestMessage.PROD_PRECO_NULO);
+    
+    } else if (preco.compareTo(BigDecimal.ZERO) <= 0) {
+      throw new BadRequestException(BadRequestMessage.PROD_PRECO_MIN);
+    
+    } else if (preco.compareTo(BigDecimal.valueOf(300)) > 0) {
+      throw new BadRequestException(BadRequestMessage.PROD_PRECO_MAX);
+    }
+  }
+
+  private static void validarCategoria(String categoria) throws BadRequestException {
+    
+    var categoriaEnum = CategoriaProduto.fromString(categoria.trim());
+
+    if (categoriaEnum == null) {
+      throw new BadRequestException(BadRequestMessage.PROD_CAT_NULA);
+    }
+  }
 }

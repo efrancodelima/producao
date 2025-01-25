@@ -10,8 +10,6 @@ import br.com.fiap.soat.exception.NotFoundException;
 import br.com.fiap.soat.service.provider.FazerCheckoutService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,24 +34,20 @@ public class FazerCheckoutImpl implements FazerCheckout {
   }
 
   @Override
-  public ResponseEntity<ResponseWrapper<StatusPedidoDto>>
-      fazerCheckout(@RequestBody PedidoDto pedidoDto) {
+  public ResponseWrapper<StatusPedidoDto> fazerCheckout(PedidoDto pedidoDto) {
 
     try {
       var statusPedidoDto = service.execute(pedidoDto);
-      return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseWrapper<>(statusPedidoDto));
+      return new ResponseWrapper<>(HttpStatus.CREATED, statusPedidoDto);
 
     } catch (BadGatewayException e) {
-      return ResponseEntity.status(HttpStatus.BAD_GATEWAY)
-          .body(new ResponseWrapper<>(e.getMessage()));
+      return new ResponseWrapper<>(HttpStatus.BAD_GATEWAY, e.getMessage());
     
     } catch (BadRequestException e) {
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-          .body(new ResponseWrapper<>(e.getMessage()));
+      return new ResponseWrapper<>(HttpStatus.BAD_REQUEST, e.getMessage());
     
     } catch (NotFoundException e) {
-      return ResponseEntity.status(HttpStatus.NOT_FOUND)
-          .body(new ResponseWrapper<>(e.getMessage()));
+      return new ResponseWrapper<>(HttpStatus.NOT_FOUND, e.getMessage());
     }
   }
 

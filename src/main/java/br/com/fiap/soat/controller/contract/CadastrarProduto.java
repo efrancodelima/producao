@@ -1,7 +1,6 @@
 package br.com.fiap.soat.controller.contract;
 
 import br.com.fiap.soat.controller.wrapper.ResponseWrapper;
-import br.com.fiap.soat.dto.ClienteDto;
 import br.com.fiap.soat.dto.ProdutoDto;
 import br.com.fiap.soat.entity.ProdutoJpa;
 import io.swagger.v3.oas.annotations.Operation;
@@ -10,7 +9,6 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -45,8 +43,7 @@ public interface CadastrarProduto {
 
   @PostMapping(value = "/novo")
         
-  ResponseEntity<ResponseWrapper<ProdutoJpa>>
-      cadastrarProduto(@RequestBody ProdutoDto clienteDto);
+  ResponseWrapper<ProdutoJpa> cadastrarProduto(@RequestBody ProdutoDto clienteDto);
 
   /** 
    * Constantes utilizadas pela interface CadastrarClienteApi.

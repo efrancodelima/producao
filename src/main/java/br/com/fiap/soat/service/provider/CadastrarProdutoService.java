@@ -1,10 +1,9 @@
 package br.com.fiap.soat.service.provider;
 
-import br.com.fiap.soat.dto.ClienteDto;
 import br.com.fiap.soat.dto.ProdutoDto;
 import br.com.fiap.soat.entity.ProdutoJpa;
 import br.com.fiap.soat.exception.BadRequestException;
-import br.com.fiap.soat.mapper.ClienteMapper;
+import br.com.fiap.soat.mapper.ProdutoMapper;
 import br.com.fiap.soat.repository.ProdutoRepository;
 import br.com.fiap.soat.service.contract.Service;
 import br.com.fiap.soat.validator.ProdutoValidator;
@@ -41,7 +40,7 @@ public class CadastrarProdutoService implements Service<ProdutoDto, ProdutoJpa> 
 
     ProdutoValidator.validar(produtoDto);
     
-    var produtoJpa = ClienteMapper.toEntity(produtoDto);
+    var produtoJpa = ProdutoMapper.toEntity(produtoDto);
 
     return repository.save(produtoJpa);
   }

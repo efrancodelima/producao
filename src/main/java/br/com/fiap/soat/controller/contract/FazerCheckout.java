@@ -11,7 +11,6 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -57,8 +56,7 @@ public interface FazerCheckout {
 
   @PostMapping(value = "/checkout/")
 
-  ResponseEntity<ResponseWrapper<StatusPedidoDto>>
-      fazerCheckout(@RequestBody PedidoDto pedidoDto)
+  ResponseWrapper<StatusPedidoDto> fazerCheckout(@RequestBody PedidoDto pedidoDto)
       throws BadRequestException, NotFoundException;
 
   /** 
