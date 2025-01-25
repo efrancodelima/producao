@@ -2,7 +2,8 @@ package br.com.fiap.soat.controller.contract;
 
 import br.com.fiap.soat.controller.wrapper.ResponseWrapper;
 import br.com.fiap.soat.dto.ClienteDto;
-import br.com.fiap.soat.entity.ClienteJpa;
+import br.com.fiap.soat.dto.ProdutoDto;
+import br.com.fiap.soat.entity.ProdutoJpa;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
@@ -16,17 +17,17 @@ import org.springframework.web.bind.annotation.RequestBody;
 /**
  * Interface da API Clientes, rota para cadastrar cliente.
  */
-@Tag(name = "Clientes")
-public interface CadastrarCliente {
+@Tag(name = "Produto")
+public interface CadastrarProduto {
 
   /**
-   * Endpoint para o cadastro de clientes.
+   * Endpoint para o cadastro de produtos.
    *
-   * @param clienteDto A requisição com os dados do cliente a ser cadastrado.
-   * @return Um objeto do tipo ResponseEntity contendo o cliente cadastrado,
-   *     em caso de sucesso, ou a mensagem de erro, em caso de falha.
+   * @param clienteDto A requisição com os dados do produto a ser cadastrado.
+   * @return Um objeto contendo o produto cadastrado, em caso de sucesso, ou 
+   *     a mensagem de erro, em caso de falha.
    */
-  @Operation(summary = "Cadastrar cliente", description = Constantes.DESC_CADASTRAR)
+  @Operation(summary = "Cadastrar produto", description = Constantes.DESCRICAO)
 
   @ApiResponses(value = {
     @ApiResponse(
@@ -42,10 +43,10 @@ public interface CadastrarCliente {
       examples = @ExampleObject(value = Constantes.EXAMPLE_BAD_REQUEST)))
   })
 
-  @PostMapping(value = "/cadastrar")
+  @PostMapping(value = "/novo")
         
-  ResponseEntity<ResponseWrapper<ClienteJpa>>
-      cadastrarCliente(@RequestBody ClienteDto clienteDto);
+  ResponseEntity<ResponseWrapper<ProdutoJpa>>
+      cadastrarProduto(@RequestBody ProdutoDto clienteDto);
 
   /** 
    * Constantes utilizadas pela interface CadastrarClienteApi.
@@ -54,22 +55,18 @@ public interface CadastrarCliente {
 
     private Constantes() {}
 
-    public static final String DESC_CADASTRAR = "Para cadastrar um cliente, "
-        + "informe os dados do cliente conforme o schema ClienteDto no final desta página."
-        + "<br>O nome e o email do cliente são opcionais, mas pelo menos um dos dois precisa "
-        + "ser informado.";
+    public static final String DESCRICAO = "Para cadastrar um produto, "
+        + "informe os dados do produto conforme o schema ProdutoDto no final desta página.";
     
     public static final String CODE_CREATED = "201";
     public static final String DESC_CREATED = "Created";
     public static final String EXAMPLE_CREATED = """
         {
-          "data": {
             "codigo": 1,
-            "cpf": 11122233396,
-            "nome": "Arthur Conan Doyle",
-            "email": "conanad@gmail.com"
-          },
-          "errorMsg": null
+            "nome": "Sabor Sertanejo",
+            "descricao": "Inspirado na tradição culinária do sertão nordestino",
+            "preco": 34.99,
+            "categoria": "LANCHE"
         }
         """;
     
@@ -78,7 +75,7 @@ public interface CadastrarCliente {
     public static final String EXAMPLE_BAD_REQUEST = """
         {
           "data": null,
-          "errorMsg": "O CPF informado é inválido."
+          "errorMsg": "O valor do produto deve ser maior que zero."
         }
         """;
   }

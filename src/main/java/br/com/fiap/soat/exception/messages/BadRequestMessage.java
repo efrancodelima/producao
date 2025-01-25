@@ -5,10 +5,14 @@ package br.com.fiap.soat.exception.messages;
  */
 public enum BadRequestMessage {
     
+  COD_PROD_NULL("Informe o código do produto."),
+  COD_PROD_MIN("O código do produto deve ser igual ou maior que 1."),
+  
+  PRODUTO_NULL("Informe os dados do produto."),
+
   CODIGO_CLIENTE("O código do cliente deve ser igual ou maior que 1."),
-  CODIGO_PRODUTO("O código do produto deve ser igual ou maior que 1"),
   CPF_INVALIDO("O CPF informado é inválido."),
-  CPF_NULL("Informe o CPF do cliente."),
+  
   EMAIL_INVALIDO("O e-mail informado é inválido."),
   EMAIL_MAX("O e-mail não pode ter mais de 40 caracteres."),
   ITEM_MIN("O pedido deve conter, pelo menos, um item."),

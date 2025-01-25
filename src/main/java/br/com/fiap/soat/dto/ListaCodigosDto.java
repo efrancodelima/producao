@@ -1,6 +1,7 @@
 package br.com.fiap.soat.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
+import java.util.List;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,11 +12,13 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ItemPedidoDto {
+public class ListaCodigosDto {
 
-  @Schema(description = "Código do produto.", example = "1")
-  private Long codigoProduto;
+  @Schema(
+      description = "Uma lista com códigos.",
+      example = """
+          [ 2, 3, 5, 7, 11, 13, 17 ]
+          """)
+  private List<Long> codigos;
 
-  @Schema(description = "Quantidade.", example = "1")
-  private Integer quantidade;
 }

@@ -1,33 +1,34 @@
 package br.com.fiap.soat.validator;
 
 import br.com.fiap.soat.dto.ClienteDto;
+import br.com.fiap.soat.dto.ProdutoDto;
 import br.com.fiap.soat.exception.BadRequestException;
 import br.com.fiap.soat.exception.messages.BadRequestMessage;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 /**
- * Responsável por validar um objeto ClienteDto recebido na requisição ao microsserviço.
+ * Responsável por validar um objeto ProdutoDto.
  */
-public class ClienteValidator {
+public class ProdutoValidator {
 
-  private ClienteValidator() {}
+  private ProdutoValidator() {}
 
   /**
-   * Valida um objeto do tipo ClienteDto.
+   * Valida um objeto do tipo ProdutoDto.
    *
-   * @param clienteDto O objeto a ser validado.
+   * @param produtoDto O objeto a ser validado.
    * @throws BadRequestException Exceção do tipo bad request lançada durante a validação.
    */
-  public static void validar(ClienteDto clienteDto) throws BadRequestException {
+  public static void validar(ProdutoDto produtoDto) throws BadRequestException {
     
-    if (isNullOrEmpty(clienteDto.getNome()) && isNullOrEmpty(clienteDto.getEmail())) {
+    if (isNullOrEmpty(produtoDto.getNome()) && isNullOrEmpty(produtoDto.getEmail())) {
       throw new BadRequestException(BadRequestMessage.NOME_EMAIL_NULL);
     }
     
-    CpfValidator.validar(clienteDto.getCpf());
-    validarNome(clienteDto.getNome());
-    validarEmail(clienteDto.getEmail());
+    CpfValidator.validar(produtoDto.getCpf());
+    validarNome(produtoDto.getNome());
+    validarEmail(produtoDto.getEmail());
   }
 
   private static void validarNome(String nome) throws BadRequestException {

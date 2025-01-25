@@ -9,7 +9,7 @@ import br.com.fiap.soat.exception.NotFoundException;
 import br.com.fiap.soat.exception.messages.BadGatewayMessage;
 import br.com.fiap.soat.exception.messages.BadRequestMessage;
 import br.com.fiap.soat.exception.messages.NotFoundMessage;
-import br.com.fiap.soat.repository.ClienteRepository;
+import br.com.fiap.soat.repository.ProdutoRepository;
 import br.com.fiap.soat.service.consumer.VerificarProdutosExistemService;
 import java.util.HashSet;
 import java.util.List;
@@ -24,11 +24,11 @@ import org.springframework.stereotype.Component;
 @Component
 public class PedidoValidator {
 
-  private final ClienteRepository clienteRepository;
+  private final ProdutoRepository clienteRepository;
   private final VerificarProdutosExistemService produtosExistemService;
 
   @Autowired
-  private PedidoValidator(ClienteRepository clienteRepository,
+  private PedidoValidator(ProdutoRepository clienteRepository,
       VerificarProdutosExistemService produtosService) {
 
     this.clienteRepository = clienteRepository;
@@ -79,7 +79,7 @@ public class PedidoValidator {
       }
 
       if (item.getCodigoProduto() == null || item.getCodigoProduto() < 1) {
-        throw new BadRequestException(BadRequestMessage.CODIGO_PRODUTO);
+        throw new BadRequestException(BadRequestMessage.COD_PROD_NULL);
       }
     }
 

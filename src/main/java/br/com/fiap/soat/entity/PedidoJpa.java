@@ -36,7 +36,7 @@ public class PedidoJpa implements Serializable {
 
   @ManyToOne(fetch = FetchType.EAGER)
   @JoinColumn(name = "codigo_cliente", nullable = true)
-  private ClienteJpa clienteJpa;
+  private ProdutoJpa clienteJpa;
 
   @ElementCollection(fetch = FetchType.EAGER)
   @CollectionTable(name = "itens_pedido", joinColumns = @JoinColumn(name = "numero_pedido"))

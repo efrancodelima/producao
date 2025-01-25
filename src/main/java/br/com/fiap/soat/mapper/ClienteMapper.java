@@ -1,7 +1,7 @@
 package br.com.fiap.soat.mapper;
 
 import br.com.fiap.soat.dto.ClienteDto;
-import br.com.fiap.soat.entity.ClienteJpa;
+import br.com.fiap.soat.entity.ProdutoJpa;
 
 /**
  * Responsável por mapear um cliente DTO para uma entidade JPA.
@@ -16,17 +16,11 @@ public class ClienteMapper {
    * @param clienteDto O objeto DTO a ser mapeado.
    * @return A entidade JPA.
    */
-  public static ClienteJpa toEntity(ClienteDto clienteDto) {
+  public static ProdutoJpa toEntity(ClienteDto clienteDto) {
     
     if (clienteDto == null) {
       return null;
     }
-
-    ClienteJpa clienteJpa = new ClienteJpa();
-    clienteJpa.setCpf(clienteDto.cpf);
-    clienteJpa.setNome(clienteDto.nome);
-    clienteJpa.setEmail(clienteDto.email);
-
-    return clienteJpa;
+    return new ProdutoJpa();
   }
 }

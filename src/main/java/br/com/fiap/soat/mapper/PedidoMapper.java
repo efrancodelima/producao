@@ -3,7 +3,7 @@ package br.com.fiap.soat.mapper;
 import br.com.fiap.soat.dto.PedidoDto;
 import br.com.fiap.soat.entity.ItemPedidoJpa;
 import br.com.fiap.soat.entity.PedidoJpa;
-import br.com.fiap.soat.repository.ClienteRepository;
+import br.com.fiap.soat.repository.ProdutoRepository;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,10 +15,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class PedidoMapper {
 
-  private final ClienteRepository clienteRepository;
+  private final ProdutoRepository clienteRepository;
 
   @Autowired
-  private PedidoMapper(ClienteRepository clienteRepository) {
+  private PedidoMapper(ProdutoRepository clienteRepository) {
     this.clienteRepository = clienteRepository;
   }
 

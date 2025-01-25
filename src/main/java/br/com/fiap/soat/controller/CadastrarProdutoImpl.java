@@ -1,15 +1,15 @@
 package br.com.fiap.soat.controller;
 
-import br.com.fiap.soat.controller.contract.CadastrarCliente;
+import br.com.fiap.soat.controller.contract.CadastrarProduto;
 import br.com.fiap.soat.controller.wrapper.ResponseWrapper;
 import br.com.fiap.soat.dto.ClienteDto;
-import br.com.fiap.soat.entity.ClienteJpa;
+import br.com.fiap.soat.dto.ProdutoDto;
+import br.com.fiap.soat.entity.ProdutoJpa;
 import br.com.fiap.soat.exception.BadRequestException;
-import br.com.fiap.soat.service.provider.CadastrarClienteService;
+import br.com.fiap.soat.service.provider.CadastrarProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,10 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
  * Controlador REST para cadastro de clientes.
  */
 @RestController
-@RequestMapping("/clientes")
-public class CadastrarClienteImpl implements CadastrarCliente {
+@RequestMapping("/produto")
+public class CadastrarProdutoImpl implements CadastrarProduto {
 
-  private final CadastrarClienteService service;
+  private final CadastrarProdutoService service;
 
   /**
    * O construtor público da classe.
@@ -29,13 +29,13 @@ public class CadastrarClienteImpl implements CadastrarCliente {
    * @param service O service para cadastrar o cliente.
    */
   @Autowired
-  public CadastrarClienteImpl(CadastrarClienteService service) {
+  public CadastrarProdutoImpl(CadastrarProdutoService service) {
     this.service = service;
   }
 
   @Override
-  public ResponseEntity<ResponseWrapper<ClienteJpa>>
-      cadastrarCliente(@RequestBody ClienteDto clienteDto) {
+  public ResponseEntity<ResponseWrapper<ProdutoJpa>>
+      cadastrarProduto(ProdutoDto clienteDto) {
 
     try {
       var cliente = service.execute(clienteDto);
