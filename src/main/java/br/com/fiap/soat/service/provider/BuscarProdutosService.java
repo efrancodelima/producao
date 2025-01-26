@@ -3,8 +3,7 @@ package br.com.fiap.soat.service.provider;
 import br.com.fiap.soat.entity.ProdutoJpa;
 import br.com.fiap.soat.exception.BadRequestException;
 import br.com.fiap.soat.repository.ProdutoRepository;
-import br.com.fiap.soat.service.contract.Service;
-import br.com.fiap.soat.validator.CodigosProdutosValidator;
+import br.com.fiap.soat.validator.CodigoProdutoValidator;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Component;
  * Service para buscar clientes pelo número do CPF.
  */
 @Component
-public class BuscarProdutosService implements Service<List<Long>, List<ProdutoJpa>> {
+public class BuscarProdutosService {
 
   private final ProdutoRepository repository;
 
@@ -28,11 +27,17 @@ public class BuscarProdutosService implements Service<List<Long>, List<ProdutoJp
     this.repository = repository;
   }
 
-  @Override
-  public List<ProdutoJpa> execute(List<Long> codigoProdutos)
-      throws BadRequestException {
+  /**
+   * Buscar um ou mais produtos.
+   *
+   * @param codigoProdutos Uma lista com os códigos dos produtos a serem buscados.
+   * @return Um objeto contendo a lista de produtos encontrados,
+   *     em caso de sucesso, ou a mensagem de erro, em caso de falha.
+   * @throws BadRequestException Exceção do tipo bad request lançada pelo método.
+   */
+  public List<ProdutoJpa> execute(List<Long> codigoProdutos) throws BadRequestException {
     
-    CodigosProdutosValidator.validar(codigoProdutos);
+    CodigoProdutoValidator.validar(codigoProdutos);
 
     List<ProdutoJpa> produtos = new ArrayList<>();
 

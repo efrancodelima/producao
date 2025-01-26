@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 public interface BuscarProdutos {
 
   /**
-   * Endpoint para buscar uma lista de produtos.
+   * Buscar um ou mais produtos.
    *
    * @param codigoProdutos Uma lista com os códigos dos produtos a serem buscados.
    * @return Um objeto contendo a lista de produtos encontrados,

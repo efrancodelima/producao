@@ -18,7 +18,10 @@ public enum BadRequestMessage {
   PROD_PRECO_MAX("O preço do produto não pode ser maior que R$ 300,00."),
   PROD_CAT_NULA("Informe a categoria do produto."),
 
-  CODIGO_CLIENTE("O código do cliente deve ser igual ou maior que 1."),
+  LIST_COD_EMPTY("Informe, pelo menos, um código para realizar a busca."),
+
+  COD_CLI_NULL("O código do cliente deve ser igual ou maior que 1."),
+  COD_CLI_MIN("O código do cliente deve ser igual ou maior que 1."),
   CPF_INVALIDO("O CPF informado é inválido."),
   
   EMAIL_INVALIDO("O e-mail informado é inválido."),
