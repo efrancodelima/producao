@@ -1,19 +1,19 @@
 package br.com.fiap.soat.service.provider;
 
+import br.com.fiap.soat.entity.CategoriaProduto;
 import br.com.fiap.soat.entity.ProdutoJpa;
 import br.com.fiap.soat.exception.BadRequestException;
 import br.com.fiap.soat.repository.ProdutoRepository;
-import br.com.fiap.soat.validator.CodigoProdutoValidator;
-import java.util.ArrayList;
+import br.com.fiap.soat.validator.CategoriaProdutoValidator;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * Service para buscar um ou mais produtos.
+ * Service para listar produtos por categoria.
  */
 @Component
-public class BuscarProdutosService {
+public class ListarProdutosPorCategoriaService {
 
   private final ProdutoRepository repository;
 
@@ -23,37 +23,21 @@ public class BuscarProdutosService {
    * @param repository O repositório para acesso ao banco de dados.
    */
   @Autowired
-  public BuscarProdutosService(ProdutoRepository repository) {
+  public ListarProdutosPorCategoriaService(ProdutoRepository repository) {
     this.repository = repository;
   }
 
   /**
-   * Buscar um ou mais produtos.
+   * Listar produtos por categoria.
    *
-   * @param codigoProdutos Uma lista com os códigos dos produtos a serem buscados.
+   * @param categoria A categoria dos produtos a serem listados.
    * @return Um objeto contendo a lista dos produtos encontrados,
    *     em caso de sucesso, ou a mensagem de erro, em caso de falha.
    * @throws BadRequestException Exceção do tipo bad request lançada pelo método.
    */
-  public List<ProdutoJpa> execute(List<Long> codigoProdutos) throws BadRequestException {
+  public List<ProdutoJpa> execute(String categoria) throws BadRequestException {
     
-    CodigoProdutoValidator.validar(codigoProdutos);
-
-    List<ProdutoJpa> produtos = new ArrayList<>();
-
-    for (Long codigo : codigoProdutos) {
-
-      var produtoOpt = repository.findById(codigo);
-
-      if (produtoOpt.isPresent()) {
-        produtos.add(produtoOpt.get());
-      
-      } else {
-        produtos.add(null);
-      }
-    }
-
-    return produtos;
+    CategoriaProdutoValidator.validar(categoria);
+    return repository.findByCategoria(CategoriaProduto.fromString(categoria));
   }
-  
 }

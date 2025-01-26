@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * Service para cadastrar clientes.
+ * Service para cadastrar produto.
  */
 @Component
 public class CadastrarProdutoService {
@@ -28,7 +28,7 @@ public class CadastrarProdutoService {
   }
 
   /**
-   * Cadastra o produto.
+   * Cadastrar produto.
    *
    * @param produtoDto O produto a ser cadastrado.
    * @return O produto cadastrado.

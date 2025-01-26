@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 /**
- * Interface da API Produtos, rota para buscar vários produtos.
+ * Interface da API Produto, rota para buscar vários produtos.
  */
 @Tag(name = "Produto")
 public interface BuscarProdutos {
@@ -24,7 +24,7 @@ public interface BuscarProdutos {
    * Buscar um ou mais produtos.
    *
    * @param codigoProdutos Uma lista com os códigos dos produtos a serem buscados.
-   * @return Um objeto contendo a lista de produtos encontrados,
+   * @return Um objeto contendo a lista dos produtos encontrados,
    *     em caso de sucesso, ou a mensagem de erro, em caso de falha.
    */
   @Operation(summary = "Buscar produtos pelos códigos", description = Constantes.DESCRICAO)
@@ -40,14 +40,7 @@ public interface BuscarProdutos {
       responseCode = Constantes.CODE_BAD_REQUEST,
       description = Constantes.DESC_BAD_REQUEST,
       content = @Content(mediaType = "application/json",
-      examples = @ExampleObject(value = Constantes.EXAMPLE_BAD_REQUEST))),
-
-    @ApiResponse(
-      responseCode = Constantes.CODE_NOT_FOUND,
-      description = Constantes.DESC_NOT_FOUND,
-      content = @Content(mediaType = "application/json",
-      examples = @ExampleObject(value = Constantes.EXAMPLE_NOT_FOUND)))
-
+      examples = @ExampleObject(value = Constantes.EXAMPLE_BAD_REQUEST)))
   })
   
   @Parameter(name = "codigos", description = "Uma lista com os códigos dos produtos",
@@ -68,28 +61,31 @@ public interface BuscarProdutos {
     public static final String DESCRICAO = "Para buscar por vários produtos de uma vez, "
         + "informe os códigos dos produtos em uma lista. O retorno será uma lista com os produtos "
         + "na mesma ordem em que foram informados os respectivos códigos. Caso algum produto não "
-        + "seja encontrado, será retornado null.";
+        + "seja encontrado, será retornado null (apenas para aquele produto).";
     
     public static final String CODE_OK = "200";
     public static final String DESC_OK = "Ok";
     public static final String EXAMPLE_OK = """
-        [
-          null,
-          {
-              "codigo": 1,
-              "nome": "X-Monstrão",
-              "descricao": "O lanche do marombeiro",
-              "preco": 34.99,
-              "categoria": "LANCHE"
-          },
-          {
-              "codigo": 2,
-              "nome": "Smoothie de Açaí",
-              "descricao": "Açaí batido coberto com creme de maracujá",
-              "preco": 19.99,
-              "categoria": "BEBIDA"
-          }
-      ]
+        {
+          "data": [
+            null,
+            {
+                "codigo": 1,
+                "nome": "X-Monstrão",
+                "descricao": "O lanche do marombeiro",
+                "preco": 34.99,
+                "categoria": "LANCHE"
+            },
+            {
+                "codigo": 2,
+                "nome": "Smoothie de Açaí",
+                "descricao": "Açaí batido coberto com creme de maracujá",
+                "preco": 19.99,
+                "categoria": "BEBIDA"
+            }
+          ],
+          "errorMsg": null
+        }
         """;
 
     public static final String CODE_BAD_REQUEST = "400";
@@ -97,18 +93,9 @@ public interface BuscarProdutos {
     public static final String EXAMPLE_BAD_REQUEST = """
         {
           "data": null,
-          "errorMsg": "O CPF informado é inválido."
+          "errorMsg": "O código informado para o produto é inválido."
         }
         """;
-    
-    public static final String CODE_NOT_FOUND = "404";
-    public static final String DESC_NOT_FOUND = "Not Found";
-    public static final String EXAMPLE_NOT_FOUND = """
-        {
-          "data": null,
-          "errorMsg": "Cliente não encontrado."
-        }
-        """;
-  }
 
+  }
 }

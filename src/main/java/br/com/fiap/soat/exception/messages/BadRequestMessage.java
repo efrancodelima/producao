@@ -20,6 +20,11 @@ public enum BadRequestMessage {
 
   LIST_COD_EMPTY("Informe, pelo menos, um código para realizar a busca."),
 
+  CAT_NULA("Informe a categoria do produto."),
+  CAT_INV("A categoria do produto é inválida."),
+
+  // Até aqui
+
   COD_CLI_NULL("O código do cliente deve ser igual ou maior que 1."),
   COD_CLI_MIN("O código do cliente deve ser igual ou maior que 1."),
   CPF_INVALIDO("O CPF informado é inválido."),

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 /**
- * Interface da API Clientes, rota para cadastrar cliente.
+ * Interface da API Produto, rota para cadastrar produto.
  */
 @Tag(name = "Produto")
 public interface CadastrarProduto {
@@ -23,8 +23,8 @@ public interface CadastrarProduto {
    * Cadastrar produto.
    *
    * @param clienteDto A requisição com os dados do produto a ser cadastrado.
-   * @return Um objeto contendo o produto cadastrado, em caso de sucesso, ou 
-   *     a mensagem de erro, em caso de falha.
+   * @return Um objeto contendo o produto cadastrado, em caso de sucesso,
+   *     ou a mensagem de erro, em caso de falha.
    */
   @Operation(summary = "Cadastrar produto", description = Constantes.DESCRICAO)
 
@@ -42,13 +42,13 @@ public interface CadastrarProduto {
       examples = @ExampleObject(value = Constantes.EXAMPLE_BAD_REQUEST)))
   })
 
-  @PostMapping(value = "/novo")
+  @PostMapping(value = "/cadastrar")
         
   ResponseEntity<ResponseWrapper<ProdutoJpa>>
       cadastrarProduto(@RequestBody ProdutoDto clienteDto);
 
   /** 
-   * Constantes utilizadas pela interface CadastrarClienteApi.
+   * Constantes utilizadas pela interface.
    */
   final class Constantes {
 
@@ -61,11 +61,14 @@ public interface CadastrarProduto {
     public static final String DESC_CREATED = "Created";
     public static final String EXAMPLE_CREATED = """
         {
-            "codigo": 1,
+          "data": {
+            "codigo": 8,
             "nome": "Sabor Sertanejo",
             "descricao": "Inspirado na tradição culinária do sertão nordestino",
-            "preco": 34.99,
+            "preco": 34.90,
             "categoria": "LANCHE"
+          },
+          "errorMsg": null
         }
         """;
     

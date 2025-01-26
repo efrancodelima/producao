@@ -7,14 +7,14 @@ import br.com.fiap.soat.exception.messages.BadRequestMessage;
 import java.math.BigDecimal;
 
 /**
- * Responsável por validar um objeto ProdutoDto.
+ * Responsável por validar um produto (DTO).
  */
 public class ProdutoValidator {
 
   private ProdutoValidator() {}
 
   /**
-   * Valida um objeto do tipo ProdutoDto.
+   * Valida um produto (DTO).
    *
    * @param produtoDto O objeto a ser validado.
    * @throws BadRequestException Exceção do tipo bad request lançada durante a validação.

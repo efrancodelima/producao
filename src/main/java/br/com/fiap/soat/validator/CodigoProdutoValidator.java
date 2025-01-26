@@ -5,14 +5,14 @@ import br.com.fiap.soat.exception.messages.BadRequestMessage;
 import java.util.List;
 
 /**
- * Responsável por validar a requisição do controller BuscarProdutos.
+ * Responsável por validar uma lista com códigos de produtos.
  */
 public class CodigoProdutoValidator {
 
   private CodigoProdutoValidator() {}
 
   /**
-   * Valida a requisição do controller BuscarProdutos.
+   * Valida uma lista com códigos de produtos.
    *
    * @param codigosProdutos Os códigos dos produtos a serem validados.
    * @throws BadRequestException Exceção do tipo bad request lançada pela validação.
