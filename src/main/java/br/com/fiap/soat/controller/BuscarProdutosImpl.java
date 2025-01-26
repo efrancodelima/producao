@@ -8,6 +8,7 @@ import br.com.fiap.soat.service.provider.BuscarProdutosService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -31,14 +32,16 @@ public class BuscarProdutosImpl implements BuscarProdutos {
   }
 
   @Override
-  public ResponseWrapper<List<ProdutoJpa>> buscarProdutos(List<Long> codigoProdutos) {
+  public ResponseEntity<ResponseWrapper<List<ProdutoJpa>>>
+      buscarProdutos(List<Long> codigoProdutos) {
 
     try {
       var produtos = service.execute(codigoProdutos);
-      return new ResponseWrapper<>(HttpStatus.OK, produtos);
+      return ResponseEntity.status(HttpStatus.OK).body(new ResponseWrapper<>(produtos));
 
     } catch (BadRequestException e) {
-      return new ResponseWrapper<>(HttpStatus.BAD_REQUEST, e.getMessage());
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+          .body(new ResponseWrapper<>(e.getMessage()));
     }
   }
 }

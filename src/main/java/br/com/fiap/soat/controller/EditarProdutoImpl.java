@@ -9,6 +9,7 @@ import br.com.fiap.soat.exception.NotFoundException;
 import br.com.fiap.soat.service.provider.EditarProdutoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,17 +33,20 @@ public class EditarProdutoImpl implements EditarProduto {
   }
 
   @Override
-  public ResponseWrapper<ProdutoJpa> editarProduto(long codigo, ProdutoDto produtoDto) {
+  public ResponseEntity<ResponseWrapper<ProdutoJpa>>
+      editarProduto(long codigo, ProdutoDto produtoDto) {
 
     try {
       var produto = service.execute(codigo, produtoDto);
-      return new ResponseWrapper<>(HttpStatus.CREATED, produto);
+      return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseWrapper<>(produto));
 
     } catch (BadRequestException e) {
-      return new ResponseWrapper<>(HttpStatus.BAD_REQUEST, e.getMessage());
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+          .body(new ResponseWrapper<>(e.getMessage()));
     
     } catch (NotFoundException e) {
-      return new ResponseWrapper<>(HttpStatus.NOT_FOUND, e.getMessage());
+      return ResponseEntity.status(HttpStatus.NOT_FOUND)
+          .body(new ResponseWrapper<>(e.getMessage()));
     }
   }
 }

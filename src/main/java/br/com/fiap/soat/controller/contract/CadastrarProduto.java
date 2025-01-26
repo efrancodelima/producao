@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.ExampleObject;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -43,7 +44,8 @@ public interface CadastrarProduto {
 
   @PostMapping(value = "/novo")
         
-  ResponseWrapper<ProdutoJpa> cadastrarProduto(@RequestBody ProdutoDto clienteDto);
+  ResponseEntity<ResponseWrapper<ProdutoJpa>>
+      cadastrarProduto(@RequestBody ProdutoDto clienteDto);
 
   /** 
    * Constantes utilizadas pela interface CadastrarClienteApi.
@@ -76,5 +78,4 @@ public interface CadastrarProduto {
         }
         """;
   }
-
 }

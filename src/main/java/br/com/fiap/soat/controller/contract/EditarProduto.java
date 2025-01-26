@@ -1,5 +1,6 @@
 package br.com.fiap.soat.controller.contract;
 
+import br.com.fiap.soat.controller.wrapper.ResponseWrapper;
 import br.com.fiap.soat.dto.ProdutoDto;
 import br.com.fiap.soat.entity.ProdutoJpa;
 import io.swagger.v3.oas.annotations.Operation;
@@ -47,7 +48,7 @@ public interface EditarProduto {
 
   @PutMapping("/editar/{codigo}")
 
-  ResponseEntity<ProdutoJpa>
+  ResponseEntity<ResponseWrapper<ProdutoJpa>>
       editarProduto(@PathVariable long codigo, @RequestBody ProdutoDto produto);
 
 
