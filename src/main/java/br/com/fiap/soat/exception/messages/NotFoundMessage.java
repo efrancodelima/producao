@@ -5,8 +5,7 @@ package br.com.fiap.soat.exception.messages;
  */
 public enum NotFoundMessage {
 
-  COD_CLIENTE("Não foi encontrado nenhum cliente para o código informado."),
-  COD_PRODUTO("Não foi encontrado nenhum produto para o código informado.");
+  PEDIDO("Nenhum pedido foi encontrado para o número informado.");
 
   private String mensagem;
 

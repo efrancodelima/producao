@@ -3,6 +3,9 @@ package br.com.fiap.soat.entity;
 import java.io.Serializable;
 import java.util.Objects;
 
+import lombok.Data;
+
+@Data
 public class StatusPedidoId implements Serializable {
 
   private Long numeroPedido;

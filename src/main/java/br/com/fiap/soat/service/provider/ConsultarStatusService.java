@@ -23,7 +23,7 @@ public class ConsultarStatusService {
   }
   
   /**
-   * Consultar o status de um ou mais pedidos.
+   * Consulta o status de um ou mais pedidos.
    *
    * @param numerosPedidos Uma lista com os números dos pedidos a serem consultados.
    * @return O status do pedido.

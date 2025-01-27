@@ -41,7 +41,7 @@ public interface AtualizarStatus {
   @Parameter(name = "pedido", description = "O número do pedido", required = true)
 
   ResponseEntity<ResponseWrapper<StatusPedidoJpa>>
-      atualizarPedido(@PathVariable("pedido") long numeroPedido);
+      atualizarStatus(@PathVariable("pedido") long numeroPedido);
 
   /** 
    * Constantes utilizadas pela interface.
