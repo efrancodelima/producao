@@ -8,13 +8,13 @@ import org.springframework.boot.context.metrics.buffering.BufferingApplicationSt
  * Classe responsável por iniciar o microsserviço.
  */
 @SpringBootApplication
-public class PedidoApp {
+public class ProducaoApp {
 
   /**
    * Método responsável por iniciar o microsserviço.
    */
   public static void main(String[] args) {
-    var application = new SpringApplication(PedidoApp.class);
+    var application = new SpringApplication(ProducaoApp.class);
     application.setApplicationStartup(new BufferingApplicationStartup(1024));
     application.run(args);
   }  

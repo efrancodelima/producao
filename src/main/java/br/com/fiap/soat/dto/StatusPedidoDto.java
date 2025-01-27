@@ -17,8 +17,8 @@ public class StatusPedidoDto {
   @Schema(description = "Status do pedido.", example = "RECEBIDO")
   public String status;
 
-  @Schema(description = "Data e hora da última atualização do pedido.",
-      example = "2024-09-08 09:10:00")
-  public String dataHora;
+  @Schema(description = "Timestamp da última atualização do pedido.",
+      example = "2025-01-20 09:10:00")
+  public String timestamp;
 
 }
