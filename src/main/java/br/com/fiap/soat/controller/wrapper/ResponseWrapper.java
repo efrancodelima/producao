@@ -1,5 +1,7 @@
 package br.com.fiap.soat.controller.wrapper;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 /**
  * Classe para encapsular o retorno dos controllers.
  */
@@ -8,12 +10,20 @@ public class ResponseWrapper<T> {
   private T data;
   private String errorMsg;
 
-  public ResponseWrapper(T data) {
+  @JsonCreator
+  public ResponseWrapper(T data, String errorMsg) {
     this.data = data;
+    this.errorMsg = errorMsg;
   }
 
-  public ResponseWrapper(String msgError) {
-    this.errorMsg = msgError;
+  public ResponseWrapper(T data) {
+    this.data = data;
+    this.errorMsg = null;
+  }
+
+  public ResponseWrapper(String errorMsg) {
+    this.data = null;
+    this.errorMsg = errorMsg;
   }
 
   // Getters e setters

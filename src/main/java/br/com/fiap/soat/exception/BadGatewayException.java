@@ -10,4 +10,8 @@ public class BadGatewayException extends Exception {
   public BadGatewayException(BadGatewayMessage msg) {
     super(msg.getMessage());
   }
+
+  public BadGatewayException(String msg) {
+    super(msg);
+  }
 }

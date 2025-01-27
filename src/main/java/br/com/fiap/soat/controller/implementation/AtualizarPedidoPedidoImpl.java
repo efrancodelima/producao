@@ -3,6 +3,7 @@ package br.com.fiap.soat.controller.implementation;
 import br.com.fiap.soat.controller.contract.AtualizarStatusPedido;
 import br.com.fiap.soat.controller.wrapper.ResponseWrapper;
 import br.com.fiap.soat.entity.RegistroProducaoJpa;
+import br.com.fiap.soat.exception.BadGatewayException;
 import br.com.fiap.soat.exception.BadRequestException;
 import br.com.fiap.soat.exception.BusinessRuleException;
 import br.com.fiap.soat.exception.NotFoundException;
@@ -33,6 +34,10 @@ public class AtualizarPedidoPedidoImpl implements AtualizarStatusPedido {
       var status = service.execute(numeroPedido);
       return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseWrapper<>(status));
 
+    } catch (BadGatewayException e) {
+      return ResponseEntity.status(HttpStatus.BAD_GATEWAY)
+          .body(new ResponseWrapper<>(e.getMessage()));
+    
     } catch (BadRequestException e) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST)
           .body(new ResponseWrapper<>(e.getMessage()));
@@ -44,6 +49,7 @@ public class AtualizarPedidoPedidoImpl implements AtualizarStatusPedido {
     } catch (NotFoundException e) {
       return ResponseEntity.status(HttpStatus.NOT_FOUND)
           .body(new ResponseWrapper<>(e.getMessage()));
+    
     }
   }
 }

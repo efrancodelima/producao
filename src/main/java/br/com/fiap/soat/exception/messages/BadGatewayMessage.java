@@ -5,7 +5,7 @@ package br.com.fiap.soat.exception.messages;
  */
 public enum BadGatewayMessage {
 
-  PAGAMENTO("Erro na comunicação com o sistema de pagamentos."),
+  PAGAMENTO("Erro na comunicação com o sistema de pagamento."),
   PRODUCAO("Erro na comunicação com o sistema de produção.");
 
   private String mensagem;
