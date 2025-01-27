@@ -10,9 +10,6 @@ import org.springframework.boot.context.metrics.buffering.BufferingApplicationSt
 @SpringBootApplication
 public class ProducaoApp {
 
-  /**
-   * Método responsável por iniciar o microsserviço.
-   */
   public static void main(String[] args) {
     var application = new SpringApplication(ProducaoApp.class);
     application.setApplicationStartup(new BufferingApplicationStartup(1024));

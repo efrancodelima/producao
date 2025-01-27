@@ -1,7 +1,7 @@
 package br.com.fiap.soat.controller.contract;
 
 import br.com.fiap.soat.controller.wrapper.ResponseWrapper;
-import br.com.fiap.soat.entity.StatusPedidoJpa;
+import br.com.fiap.soat.entity.RegistroProducaoJpa;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -17,15 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
  * Interface da API Pedido, rota para atualizar o status do pedido.
  */
 @Tag(name = "Pedido")
-public interface AtualizarStatus {
+public interface AtualizarStatusPedido {
 
-  /**
-   * Atualiza o status do pedido.
-   *
-   * @param numeroPedido O número do pedido a ser atualizado.
-   * @return Um objeto contendo o status do pedido atualizado, em caso de sucesso,
-   *     ou a mensagem de erro, em caso de falha.
-   */
   @Operation(summary = "Atualizar o status do pedido", description = Constantes.DESCRICAO)
 
   @PostMapping(value = "/atualizar/{pedido}")
@@ -40,8 +33,8 @@ public interface AtualizarStatus {
   
   @Parameter(name = "pedido", description = "O número do pedido", required = true)
 
-  ResponseEntity<ResponseWrapper<StatusPedidoJpa>>
-      atualizarStatus(@PathVariable("pedido") long numeroPedido);
+  ResponseEntity<ResponseWrapper<RegistroProducaoJpa>>
+      atualizarPedido(@PathVariable("pedido") long numeroPedido);
 
   /** 
    * Constantes utilizadas pela interface.

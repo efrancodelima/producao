@@ -1,7 +1,7 @@
 package br.com.fiap.soat.controller.contract;
 
 import br.com.fiap.soat.controller.wrapper.ResponseWrapper;
-import br.com.fiap.soat.entity.StatusPedidoJpa;
+import br.com.fiap.soat.entity.RegistroProducaoJpa;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -18,16 +18,12 @@ import org.springframework.web.bind.annotation.PathVariable;
  * Interface da API Pedido, rota para consultar o status de um ou mais pedidos.
  */
 @Tag(name = "Pedido")
-public interface ConsultarStatus {
+public interface ConsultarStatusPedido {
 
-  /**
-   * Consultar o status de um ou mais pedidos.
-   *
-   * @param numerosPedidos Uma lista com os números dos pedidos a serem consultados.
-   * @return Um objeto contendo a lista com os status dos pedidos, em caso de sucesso,
-   *     ou a mensagem de erro, em caso de falha.
-   */
-  @Operation(summary = "Consultar o status de um ou mais pedidos", description = Constantes.DESCRICAO)
+  @Operation(
+      summary = "Consultar o status de um ou mais pedidos",
+      description = Constantes.DESCRICAO
+  )
 
   @ApiResponses(value = {
     @ApiResponse(
@@ -42,7 +38,7 @@ public interface ConsultarStatus {
   
   @GetMapping(value = "/consultar/{pedidos}")
 
-  ResponseEntity<ResponseWrapper<List<StatusPedidoJpa>>>
+  ResponseEntity<ResponseWrapper<List<RegistroProducaoJpa>>>
       consultarStatus(@PathVariable("pedidos") List<Long> numerosPedidos);
 
   /** 

@@ -1,32 +1,24 @@
 package br.com.fiap.soat.controller.contract;
 
 import br.com.fiap.soat.controller.wrapper.ResponseWrapper;
-import br.com.fiap.soat.entity.StatusPedidoJpa;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import br.com.fiap.soat.entity.RegistroProducaoJpa;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.ExampleObject;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
- * Interface da API Pedido, rota para listar pedidos.
+ * Interface da API Pedido, rota para listar os itens da esteira de produção.
  */
 @Tag(name = "Pedido")
-public interface ListarPedidos {
+public interface ListarItensProducao {
 
-  /**
-   * Lista os pedidos nessa ordem: Pronto > Em Preparação > Recebido.
-   * Pedidos mais antigos primeiro e mais novos depois.
-   * Pedidos finalizados não são listados.
-   *
-   * @return Um objeto contendo a lista de pedidos, em caso de sucesso,
-   *     ou a mensagem de erro, em caso de falha.
-   */
-  @Operation(summary = "Listar pedidos", description = Constantes.DESCRICAO)
+  @Operation(summary = "Listar itens da esteira de produção", description = Constantes.DESCRICAO)
 
   @GetMapping(value = "/listar/")
 
@@ -38,7 +30,7 @@ public interface ListarPedidos {
       examples = @ExampleObject(value = Constantes.EXAMPLE_OK)))
   })
   
-  ResponseEntity<ResponseWrapper<List<StatusPedidoJpa>>> listarPedidos();
+  ResponseEntity<ResponseWrapper<List<RegistroProducaoJpa>>> listarItensProducao();
 
   /** 
    * Constantes utilizadas pela interface.
@@ -47,10 +39,10 @@ public interface ListarPedidos {
 
     private Constantes() {}
 
-    public static final String DESCRICAO = "Lista os pedidos nessa ordem: "
+    public static final String DESCRICAO = "Lista os itens de produção nessa ordem: "
         + "Pronto > Em Preparação > Recebido."
-        + "<br>Pedidos mais antigos primeiro e mais novos depois."
-        + "<br>Pedidos finalizados não são listados.";
+        + "<br>Itens mais antigos primeiro e mais novos depois."
+        + "<br>Itens finalizados não são listados.";
     
     public static final String CODE_OK = "200";
     public static final String DESC_OK = "Ok";

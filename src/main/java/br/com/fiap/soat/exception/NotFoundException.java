@@ -1,19 +1,11 @@
 package br.com.fiap.soat.exception;
 
-import br.com.fiap.soat.exception.messages.NotFoundMessage;
-
 /**
- * Exceção customizada da aplicação.
+ * Exceção customizada para recursos não encontrados.
  */
 public class NotFoundException extends Exception {
 
-  /**
-   * Construtor.
-   *
-   * @param msg Mensagem de erro associada à exceção.
-   */
-  public NotFoundException(NotFoundMessage msg) {
-    super(msg.getMessage());
+  public NotFoundException() {
+    super("Nenhum pedido foi encontrado para o número informado.");
   }
-
 }

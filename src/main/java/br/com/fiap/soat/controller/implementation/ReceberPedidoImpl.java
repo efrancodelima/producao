@@ -2,7 +2,7 @@ package br.com.fiap.soat.controller.implementation;
 
 import br.com.fiap.soat.controller.contract.ReceberPedido;
 import br.com.fiap.soat.controller.wrapper.ResponseWrapper;
-import br.com.fiap.soat.entity.StatusPedidoJpa;
+import br.com.fiap.soat.entity.RegistroProducaoJpa;
 import br.com.fiap.soat.exception.BadRequestException;
 import br.com.fiap.soat.service.provider.ReceberPedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,18 +22,13 @@ public class ReceberPedidoImpl implements ReceberPedido {
 
   private final ReceberPedidoService service;
 
-  /**
-   * O construtor público da classe.
-   *
-   * @param service O service para processar a requisição.
-   */
   @Autowired
   public ReceberPedidoImpl(ReceberPedidoService service) {
     this.service = service;
   }
 
   @Override
-  public ResponseEntity<ResponseWrapper<StatusPedidoJpa>> receberPedido(long numeroPedido) {
+  public ResponseEntity<ResponseWrapper<RegistroProducaoJpa>> receberPedido(long numeroPedido) {
 
     try {
       var statusPedido = service.execute(numeroPedido);

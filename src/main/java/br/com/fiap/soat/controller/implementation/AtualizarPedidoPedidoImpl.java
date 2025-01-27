@@ -1,12 +1,12 @@
 package br.com.fiap.soat.controller.implementation;
 
-import br.com.fiap.soat.controller.contract.AtualizarStatus;
+import br.com.fiap.soat.controller.contract.AtualizarStatusPedido;
 import br.com.fiap.soat.controller.wrapper.ResponseWrapper;
-import br.com.fiap.soat.entity.StatusPedidoJpa;
+import br.com.fiap.soat.entity.RegistroProducaoJpa;
 import br.com.fiap.soat.exception.BadRequestException;
 import br.com.fiap.soat.exception.BusinessRuleException;
 import br.com.fiap.soat.exception.NotFoundException;
-import br.com.fiap.soat.service.provider.AtualizarStatusService;
+import br.com.fiap.soat.service.provider.AtualizarStatusPedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,34 +18,32 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/pedido")
-public class AtualizarStatusImpl implements AtualizarStatus {
+public class AtualizarPedidoPedidoImpl implements AtualizarStatusPedido {
 
-  private final AtualizarStatusService service;
+  private final AtualizarStatusPedidoService service;
 
-  /**
-   * O construtor público da classe.
-   *
-   * @param service O service para processar a requisição.
-   */
   @Autowired
-  public AtualizarStatusImpl(AtualizarStatusService service) {
+  public AtualizarPedidoPedidoImpl(AtualizarStatusPedidoService service) {
     this.service = service;
   }
 
   @Override
-  public ResponseEntity<ResponseWrapper<StatusPedidoJpa>> atualizarStatus(long numeroPedido) {
+  public ResponseEntity<ResponseWrapper<RegistroProducaoJpa>> atualizarPedido(long numeroPedido) {
     try {
       var status = service.execute(numeroPedido);
       return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseWrapper<>(status));
 
     } catch (BadRequestException e) {
-      return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new ResponseWrapper<>(e.getMessage()));
+      return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+          .body(new ResponseWrapper<>(e.getMessage()));
     
     } catch (BusinessRuleException e) {
-      return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(new ResponseWrapper<>(e.getMessage()));
+      return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
+          .body(new ResponseWrapper<>(e.getMessage()));
     
     } catch (NotFoundException e) {
-      return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new ResponseWrapper<>(e.getMessage()));
+      return ResponseEntity.status(HttpStatus.NOT_FOUND)
+          .body(new ResponseWrapper<>(e.getMessage()));
     }
   }
 }

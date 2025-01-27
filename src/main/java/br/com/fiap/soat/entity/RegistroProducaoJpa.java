@@ -14,15 +14,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * Entidade JPA StatusPedido.
+ * Entidade JPA EsteiraProducaoJpa.
  */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "status_pedido")
-@IdClass(StatusPedidoId.class)
-public class StatusPedidoJpa implements Serializable {
+@Table(name = "registro_producao")
+@IdClass(RegistroProducaoId.class)
+public class RegistroProducaoJpa implements Serializable {
 
   private static final long serialVersionUID = 1L;
 
@@ -32,8 +32,8 @@ public class StatusPedidoJpa implements Serializable {
 
   @Id
   @Enumerated(EnumType.STRING)
-  @Column(name = "status", nullable = false)
-  private StatusPedidoEnum status;
+  @Column(name = "status_pedido", nullable = false)
+  private StatusPedido status;
 
   @Column(name = "timestamp", nullable = false)
   private LocalDateTime timestamp;

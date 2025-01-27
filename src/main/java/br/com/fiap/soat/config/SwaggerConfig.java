@@ -12,11 +12,6 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class SwaggerConfig {
 
-  /**
-   * Retorna um objeto do tipo OpenAPI, que configura a exibição da API do swagger.
-   *
-   * @return Um objeto do tipo OpenAPI.
-   */
   @Bean
   public OpenAPI customOpenApi() {
 
@@ -32,5 +27,4 @@ public class SwaggerConfig {
                 + "<br>FIAP | Pós-tech | Software Architecture | Tech Challenge | Fase 4"))
             .addTagsItem(tagPedidos);
   }
-
 }
