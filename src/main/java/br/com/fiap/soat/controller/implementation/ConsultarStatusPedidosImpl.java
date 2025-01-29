@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Controlador REST para consultar o status de um ou mais pedidos.
  */
 @RestController
-@RequestMapping("/pedido")
+@RequestMapping("/producao")
 public class ConsultarStatusPedidosImpl implements ConsultarStatusPedido {
 
   private final ConsultarStatusPedidosService service;

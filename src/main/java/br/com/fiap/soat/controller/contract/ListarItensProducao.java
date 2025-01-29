@@ -13,9 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 
 /**
- * Interface da API Pedido, rota para listar os itens da esteira de produção.
+ * Interface da API Producao, rota para listar os itens da esteira de produção.
  */
-@Tag(name = "Pedido")
+@Tag(name = "Producao")
 public interface ListarItensProducao {
 
   @Operation(summary = "Listar itens da esteira de produção", description = Constantes.DESCRICAO)
@@ -48,65 +48,19 @@ public interface ListarItensProducao {
     public static final String DESC_OK = "Ok";
     public static final String EXAMPLE_OK = """
         {
-          data: [
+          "data": [
             {
-              "numero": 1,
-              "cliente": null,
-              "itens": [
-                {
-                  "produto": {
-                    "codigo": 1,
-                    "nome": "X-Monstrão",
-                    "descricao": null,
-                    "preco": 20,
-                    "categoria": "LANCHE"
-                  },
-                  "quantidade": 1,
-                  "valorItem": 20
-                }
-              ],
-              "dataHoraCheckout": "2024-09-20T10:22:09.175124",
-              "statusPagamento": {
-                "codigo": 0,
-                "status": "AGUARDANDO_PAGAMENTO",
-                "dataHora": "2024-09-20T10:22:09.246543"
-              },
-              "statusPedido": {
-                "status": "RECEBIDO",
-                "dataHora": "2024-09-20T10:22:09.175173"
-              },
-              "valorPedido": 20
+              "numeroPedido": 1,
+              "status": "EM_PREPARACAO",
+              "timestamp": "2025-01-20T10:22:000000"
             },
             {
-              "numero": 2,
-              "cliente": null,
-              "itens": [
-                {
-                  "produto": {
-                    "codigo": 2,
-                    "nome": "X-Monstrinho",
-                    "descricao": null,
-                    "preco": 20,
-                    "categoria": "LANCHE"
-                  },
-                  "quantidade": 2,
-                  "valorItem": 40
-                }
-              ],
-              "dataHoraCheckout": "2024-09-20T10:22:15.888514",
-              "statusPagamento": {
-                "codigo": 0,
-                "status": "AGUARDANDO_PAGAMENTO",
-                "dataHora": "2024-09-20T10:22:15.899493"
-              },
-              "statusPedido": {
-                "status": "RECEBIDO",
-                "dataHora": "2024-09-20T10:22:15.888543"
-              },
-              "valorPedido": 40
+              "numeroPedido": 2,
+              "status": "RECEBIDO",
+              "timestamp": "2025-01-20T10:28:000000"
             }
           ],
-          errorMsg: null
+          "errorMsg": null
         }
         """;
 

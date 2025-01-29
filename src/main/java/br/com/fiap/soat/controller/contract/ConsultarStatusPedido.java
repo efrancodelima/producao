@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 /**
- * Interface da API Pedido, rota para consultar o status de um ou mais pedidos.
+ * Interface da API Producao, rota para consultar o status de um ou mais pedidos.
  */
-@Tag(name = "Pedido")
+@Tag(name = "Producao")
 public interface ConsultarStatusPedido {
 
   @Operation(
@@ -30,7 +30,13 @@ public interface ConsultarStatusPedido {
       responseCode = Constantes.CODE_OK,
       description = Constantes.DESC_OK,
       content = @Content(mediaType = "application/json",
-      examples = @ExampleObject(value = Constantes.EXAMPLE_OK)))
+      examples = @ExampleObject(value = Constantes.EXAMPLE_OK))),
+    
+    @ApiResponse(
+      responseCode = Constantes.CODE_BAD_REQUEST,
+      description = Constantes.DESC_BAD_REQUEST,
+      content = @Content(mediaType = "application/json",
+      examples = @ExampleObject(value = Constantes.EXAMPLE_BAD_REQUEST)))
   })
   
   @Parameter(name = "pedidos", description = "Uma lista com os números dos pedidos",
@@ -65,9 +71,18 @@ public interface ConsultarStatusPedido {
               "numeroPedido": 2,
               "status": "RECEBIDO",
               "timestamp": "2025-01-20T10:25:00.000000"
-            },
+            }
           ],
           "errorMsg": null
+        }
+        """;
+
+    public static final String CODE_BAD_REQUEST = "400";
+    public static final String DESC_BAD_REQUEST = "Bad Request";
+    public static final String EXAMPLE_BAD_REQUEST = """
+        {
+          "data": null,
+          "errorMsg": "O número do pedido deve ser igual ou maior que 1."
         }
         """;
 

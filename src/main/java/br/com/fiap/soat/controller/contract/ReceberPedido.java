@@ -10,9 +10,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
- * Interface da API Pedido, rota para receber pedido.
+ * Interface da API Producao, rota para receber pedido.
  */
-@Tag(name = "Pedido")
+@Tag(name = "Producao")
 public interface ReceberPedido {
 
   @Hidden

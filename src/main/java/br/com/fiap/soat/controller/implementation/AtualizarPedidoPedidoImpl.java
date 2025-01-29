@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Controlador REST para atualizar o status do pedido.
  */
 @RestController
-@RequestMapping("/pedido")
+@RequestMapping("/producao")
 public class AtualizarPedidoPedidoImpl implements AtualizarStatusPedido {
 
   private final AtualizarStatusPedidoService service;

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  * as notificações de checkout do sistema de pedidos.
  */
 @RestController
-@RequestMapping("/pedido")
+@RequestMapping("/producao")
 public class ReceberPedidoImpl implements ReceberPedido {
 
   private final ReceberPedidoService service;

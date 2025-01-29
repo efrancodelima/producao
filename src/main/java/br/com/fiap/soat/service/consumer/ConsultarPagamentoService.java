@@ -3,7 +3,6 @@ package br.com.fiap.soat.service.consumer;
 import br.com.fiap.soat.controller.wrapper.ResponseWrapper;
 import br.com.fiap.soat.dto.PagamentoDto;
 import br.com.fiap.soat.exception.BadGatewayException;
-import br.com.fiap.soat.exception.messages.BadGatewayMessage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
@@ -38,7 +37,7 @@ public class ConsultarPagamentoService {
       var responseBody = response.getBody();
 
       if (responseBody == null || responseBody.getData() == null) {
-        throw new BadGatewayException(BadGatewayMessage.PAGAMENTO);
+        throw new BadGatewayException("Erro na comunicação com o sistema de pagamento.");
       } else {
         return responseBody.getData();
       }

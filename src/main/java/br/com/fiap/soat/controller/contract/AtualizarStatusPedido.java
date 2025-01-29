@@ -14,9 +14,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
- * Interface da API Pedido, rota para atualizar o status do pedido.
+ * Interface da API Producao, rota para atualizar o status do pedido.
  */
-@Tag(name = "Pedido")
+@Tag(name = "Producao")
 public interface AtualizarStatusPedido {
 
   @Operation(summary = "Atualizar o status do pedido", description = Constantes.DESCRICAO)
@@ -28,7 +28,32 @@ public interface AtualizarStatusPedido {
       responseCode = Constantes.CODE_OK,
       description = Constantes.DESC_OK,
       content = @Content(mediaType = "application/json",
-      examples = @ExampleObject(value = Constantes.EXAMPLE_OK)))
+      examples = @ExampleObject(value = Constantes.EXAMPLE_OK))),
+    
+    @ApiResponse(
+      responseCode = Constantes.CODE_BAD_REQUEST,
+      description = Constantes.DESC_BAD_REQUEST,
+      content = @Content(mediaType = "application/json",
+      examples = @ExampleObject(value = Constantes.EXAMPLE_BAD_REQUEST))),
+    
+    @ApiResponse(
+      responseCode = Constantes.CODE_NOT_FOUND,
+      description = Constantes.DESC_NOT_FOUND,
+      content = @Content(mediaType = "application/json",
+      examples = @ExampleObject(value = Constantes.EXAMPLE_NOT_FOUND))),
+    
+    @ApiResponse(
+      responseCode = Constantes.CODE_UN_ENTITY,
+      description = Constantes.DESC_UN_ENTITY,
+      content = @Content(mediaType = "application/json",
+      examples = @ExampleObject(value = Constantes.EXAMPLE_UN_ENTITY))),
+  
+    @ApiResponse(
+      responseCode = Constantes.CODE_BAD_GATEWAY,
+      description = Constantes.DESC_BAD_GATEWAY,
+      content = @Content(mediaType = "application/json",
+      examples = @ExampleObject(value = Constantes.EXAMPLE_BAD_GATEWAY))),
+
   })
   
   @Parameter(name = "pedido", description = "O número do pedido", required = true)
@@ -53,10 +78,46 @@ public interface AtualizarStatusPedido {
         {
           "data": {
             "numeroPedido": 1,
-            "status": "RECEBIDO",
-            "timestamp": "2024-09-20T10:22:09.175173"
+            "status": "PRONTO",
+            "timestamp": "2025-01-20T10:22:00.000000"
           },
           "errorMsg": null
+        }
+        """;
+    
+    public static final String CODE_BAD_REQUEST = "400";
+    public static final String DESC_BAD_REQUEST = "Bad Request";
+    public static final String EXAMPLE_BAD_REQUEST = """
+        {
+          "data": null,
+          "errorMsg": "O número do pedido deve ser igual ou maior que 1."
+        }
+        """;
+
+    public static final String CODE_NOT_FOUND = "404";
+    public static final String DESC_NOT_FOUND = "Not Found";
+    public static final String EXAMPLE_NOT_FOUND = """
+        {
+          "data": null,
+          "errorMsg": "Nenhum pedido foi encontrado para o número informado."
+        }
+        """;
+
+    public static final String CODE_UN_ENTITY = "422";
+    public static final String DESC_UN_ENTITY = "Unprocessable Entity";
+    public static final String EXAMPLE_UN_ENTITY = """
+        {
+          "data": null,
+          "errorMsg": "O pedido já foi finalizado."
+        }
+        """;
+
+    public static final String CODE_BAD_GATEWAY = "502";
+    public static final String DESC_BAD_GATEWAY = "Bad Gateway";
+    public static final String EXAMPLE_BAD_GATEWAY = """
+        {
+          "data": null,
+          "errorMsg": "Erro na comunicação com o sistema de pagamento."
         }
         """;
 

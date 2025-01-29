@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
  * Controlador REST para listar os itens da esteira de produção.
  */
 @RestController
-@RequestMapping("/pedido")
+@RequestMapping("/producao")
 public class ListarItensProducaoImpl implements ListarItensProducao {
 
   private final ListarItensProducaoService service;
