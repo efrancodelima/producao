@@ -13,6 +13,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RegistroProducaoRepository extends JpaRepository<RegistroProducaoJpa, Long> {
 
+  boolean existsByNumeroPedido(Long numeroPedido);
+  
   Optional<RegistroProducaoJpa> findTopByNumeroPedidoOrderByTimestampDesc(Long numeroPedido);
 
   @Query("SELECT r FROM RegistroProducaoJpa r WHERE r.timestamp = "

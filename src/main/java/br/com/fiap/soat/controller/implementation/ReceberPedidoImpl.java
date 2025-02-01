@@ -4,6 +4,7 @@ import br.com.fiap.soat.controller.contract.ReceberPedido;
 import br.com.fiap.soat.controller.wrapper.ResponseWrapper;
 import br.com.fiap.soat.entity.RegistroProducaoJpa;
 import br.com.fiap.soat.exception.BadRequestException;
+import br.com.fiap.soat.exception.BusinessRuleException;
 import br.com.fiap.soat.service.provider.ReceberPedidoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,6 +37,10 @@ public class ReceberPedidoImpl implements ReceberPedido {
 
     } catch (BadRequestException e) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+          .body(new ResponseWrapper<>(e.getMessage()));
+    
+    } catch (BusinessRuleException e) {
+      return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
           .body(new ResponseWrapper<>(e.getMessage()));
     }
   }

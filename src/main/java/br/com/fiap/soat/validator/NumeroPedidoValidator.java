@@ -22,9 +22,13 @@ public class NumeroPedidoValidator {
     }
   }
 
-  public static void validar(List<Long> numeroPedido) throws BadRequestException {
+  public static void validar(List<Long> numerosPedidos) throws BadRequestException {
 
-    for (Long num : numeroPedido) {
+    if (numerosPedidos == null) {
+      throw new BadRequestException(BadRequestMessage.NUM_PED_NULL);
+    }
+
+    for (Long num : numerosPedidos) {
       validar(num);
     }
   }

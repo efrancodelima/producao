@@ -19,12 +19,12 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/producao")
-public class AtualizarPedidoPedidoImpl implements AtualizarStatusPedido {
+public class AtualizarStatusPedidoImpl implements AtualizarStatusPedido {
 
   private final AtualizarStatusPedidoService service;
 
   @Autowired
-  public AtualizarPedidoPedidoImpl(AtualizarStatusPedidoService service) {
+  public AtualizarStatusPedidoImpl(AtualizarStatusPedidoService service) {
     this.service = service;
   }
 
@@ -32,24 +32,23 @@ public class AtualizarPedidoPedidoImpl implements AtualizarStatusPedido {
   public ResponseEntity<ResponseWrapper<RegistroProducaoJpa>> atualizarPedido(long numeroPedido) {
     try {
       var status = service.execute(numeroPedido);
-      return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseWrapper<>(status));
+      return ResponseEntity.status(HttpStatus.OK).body(new ResponseWrapper<>(status));
 
-    } catch (BadGatewayException e) {
-      return ResponseEntity.status(HttpStatus.BAD_GATEWAY)
-          .body(new ResponseWrapper<>(e.getMessage()));
-    
     } catch (BadRequestException e) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-          .body(new ResponseWrapper<>(e.getMessage()));
-    
-    } catch (BusinessRuleException e) {
-      return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
           .body(new ResponseWrapper<>(e.getMessage()));
     
     } catch (NotFoundException e) {
       return ResponseEntity.status(HttpStatus.NOT_FOUND)
           .body(new ResponseWrapper<>(e.getMessage()));
     
+    } catch (BusinessRuleException e) {
+      return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY)
+          .body(new ResponseWrapper<>(e.getMessage()));
+    
+    } catch (BadGatewayException e) {
+      return ResponseEntity.status(HttpStatus.BAD_GATEWAY)
+          .body(new ResponseWrapper<>(e.getMessage()));
     }
   }
 }

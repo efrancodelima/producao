@@ -13,12 +13,12 @@ import org.springframework.stereotype.Component;
  * Service para receber o pedido.
  */
 @Component
-public class ConsultarStatusPedidosService {
+public class ConsultarStatusPedidoService {
 
   private final RegistroProducaoRepository repository;
 
   @Autowired
-  public ConsultarStatusPedidosService(RegistroProducaoRepository repository) {
+  public ConsultarStatusPedidoService(RegistroProducaoRepository repository) {
     this.repository = repository;
   }
   

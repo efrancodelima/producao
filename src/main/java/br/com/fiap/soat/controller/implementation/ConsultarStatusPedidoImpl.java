@@ -4,7 +4,7 @@ import br.com.fiap.soat.controller.contract.ConsultarStatusPedido;
 import br.com.fiap.soat.controller.wrapper.ResponseWrapper;
 import br.com.fiap.soat.entity.RegistroProducaoJpa;
 import br.com.fiap.soat.exception.BadRequestException;
-import br.com.fiap.soat.service.provider.ConsultarStatusPedidosService;
+import br.com.fiap.soat.service.provider.ConsultarStatusPedidoService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/producao")
-public class ConsultarStatusPedidosImpl implements ConsultarStatusPedido {
+public class ConsultarStatusPedidoImpl implements ConsultarStatusPedido {
 
-  private final ConsultarStatusPedidosService service;
+  private final ConsultarStatusPedidoService service;
 
   @Autowired
-  public ConsultarStatusPedidosImpl(ConsultarStatusPedidosService service) {
+  public ConsultarStatusPedidoImpl(ConsultarStatusPedidoService service) {
     this.service = service;
   }
 
@@ -32,7 +32,7 @@ public class ConsultarStatusPedidosImpl implements ConsultarStatusPedido {
     
     try {
       var response = service.execute(numerosPedidos);
-      return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseWrapper<>(response));
+      return ResponseEntity.status(HttpStatus.OK).body(new ResponseWrapper<>(response));
 
     } catch (BadRequestException e) {
       return ResponseEntity.status(HttpStatus.BAD_REQUEST)

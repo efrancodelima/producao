@@ -28,7 +28,7 @@ public class ListarItensProducaoImpl implements ListarItensProducao {
   @Override
   public ResponseEntity<ResponseWrapper<List<RegistroProducaoJpa>>> listarItensProducao() {
     var listaItens = service.execute();
-    return ResponseEntity.status(HttpStatus.CREATED).body(new ResponseWrapper<>(listaItens));
+    return ResponseEntity.status(HttpStatus.OK).body(new ResponseWrapper<>(listaItens));
   }
 }
 
