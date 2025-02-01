@@ -10,6 +10,7 @@ import br.com.fiap.soat.dto.PagamentoDto;
 import br.com.fiap.soat.entity.RegistroProducaoJpa;
 import br.com.fiap.soat.entity.StatusPedido;
 import br.com.fiap.soat.exception.BusinessRuleException;
+import br.com.fiap.soat.exception.NotFoundException;
 import br.com.fiap.soat.exception.messages.BusinessRuleMessage;
 import br.com.fiap.soat.repository.RegistroProducaoRepository;
 import br.com.fiap.soat.service.consumer.ConsultarPagamentoService;
@@ -50,8 +51,8 @@ class AtualizarStatusPedidoServiceTest {
   @Test
   void deveAtualizarStatusPedidoComSucesso() throws Exception {
 
-    // Arrange
-    var registroProducao = getRegistroProducao(StatusPedido.EM_PREPARACAO);
+    // Arrange (repository)
+    var registroProducao = getRegistroProducao(StatusPedido.RECEBIDO);
 
     doReturn(Optional.of(registroProducao)).when(repositoryMock)
         .findTopByNumeroPedidoOrderByTimestampDesc(Mockito.anyLong());
@@ -60,11 +61,28 @@ class AtualizarStatusPedidoServiceTest {
         .when(repositoryMock)
         .save(any(RegistroProducaoJpa.class));
 
+    // Arrange (pagamento)
+    var pagamento = getRegistroPagamento(true);
+    doReturn(pagamento).when(servicePagamentoMock).execute(Mockito.anyLong());
+
     // Act
     var response = service.execute(1L);
 
     // Assert
-    assertEquals(StatusPedido.PRONTO, response.getStatus());
+    assertEquals(StatusPedido.EM_PREPARACAO, response.getStatus());
+  }
+
+  @Test
+  void deveLancarExcecaoSePedidoNaoExistir() {
+
+    // Arrange
+    doReturn(Optional.empty()).when(repositoryMock)
+        .findTopByNumeroPedidoOrderByTimestampDesc(Mockito.anyLong());
+
+    // Act and assert
+    assertThrows(NotFoundException.class, () -> {
+      service.execute(1L);
+    });
   }
 
   @Test
