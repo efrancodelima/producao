@@ -4,9 +4,6 @@ import java.io.Serializable;
 import java.util.Objects;
 import lombok.Data;
 
-/**
- * Classe para o identificador da entidade JPA.
- */
 @Data
 public class RegistroProducaoId implements Serializable {
 

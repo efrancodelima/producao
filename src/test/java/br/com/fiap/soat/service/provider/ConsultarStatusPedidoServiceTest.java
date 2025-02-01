@@ -1,6 +1,5 @@
 package br.com.fiap.soat.service.provider;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doReturn;
 
@@ -12,6 +11,7 @@ import java.util.Optional;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -19,15 +19,16 @@ import org.mockito.MockitoAnnotations;
 class ConsultarStatusPedidoServiceTest {
 
   AutoCloseable closeable;
-  ConsultarStatusPedidoService service;
 
   @Mock
   RegistroProducaoRepository repositoryMock;
 
+  @InjectMocks
+  ConsultarStatusPedidoService service;
+
   @BeforeEach
   void setup() {
     closeable = MockitoAnnotations.openMocks(this);
-    this.service = new ConsultarStatusPedidoService(repositoryMock);
   }
 
   @AfterEach
@@ -36,17 +37,19 @@ class ConsultarStatusPedidoServiceTest {
   }
 
   @Test
-  void deveConsultarStatusPedidoComSucesso() {
+  void deveConsultarStatusPedidoComSucesso() throws Exception {
 
+    // Arrange
     var registroProducao = new RegistroProducaoJpa();
 
     doReturn(Optional.of(registroProducao)).when(repositoryMock)
         .findTopByNumeroPedidoOrderByTimestampDesc(Mockito.anyLong());
 
-    assertDoesNotThrow(() -> {
-      var response = service.execute(getListaNumero());
-      assertEquals(registroProducao, response.get(0));
-    });
+    // Act
+    var response = service.execute(getListaNumero());
+
+    // Assert
+    assertEquals(registroProducao, response.get(0));
   }
 
   private List<Long> getListaNumero() {

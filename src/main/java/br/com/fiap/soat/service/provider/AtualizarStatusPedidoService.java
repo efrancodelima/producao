@@ -14,9 +14,6 @@ import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-/**
- * Service para atualizar o status do pedido.
- */
 @Component
 public class AtualizarStatusPedidoService {
 

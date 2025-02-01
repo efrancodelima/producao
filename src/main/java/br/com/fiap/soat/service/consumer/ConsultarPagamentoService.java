@@ -12,6 +12,7 @@ import org.springframework.web.client.RestTemplate;
 
 /**
  * Service para consultar o status do pagamento.
+ * Essa consulta é feita quando o status do pedido passa de "recebido" para "em produção".
  */
 @Component
 public class ConsultarPagamentoService {
@@ -19,7 +20,7 @@ public class ConsultarPagamentoService {
   private final RestTemplate restTemplate;
     
   @Autowired
-  private ConsultarPagamentoService(RestTemplate restTemplate) {
+  public ConsultarPagamentoService(RestTemplate restTemplate) {
     this.restTemplate = restTemplate;
   }
   

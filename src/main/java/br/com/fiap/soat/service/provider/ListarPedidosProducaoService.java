@@ -8,9 +8,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-/**
- * Service para listar os itens de produção.
- */
 @Component
 public class ListarPedidosProducaoService {
 
@@ -27,7 +24,9 @@ public class ListarPedidosProducaoService {
 
     excluirItensFinalizados(listaRegistros);
 
-    ordenarRegistros(listaRegistros);
+    if (listaRegistros.size() > 1) {
+      ordenarRegistros(listaRegistros);
+    }
 
     return listaRegistros;
   }
@@ -43,10 +42,6 @@ public class ListarPedidosProducaoService {
 
   private static void ordenarRegistros(List<RegistroProducaoJpa> registros) {
 
-    if (registros.size() <= 1) {
-      return;
-    }
-      
     registros.sort(Comparator
         .comparing((RegistroProducaoJpa r) -> {
           switch (r.getStatus()) {

@@ -9,9 +9,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-/**
- * Service para receber o pedido.
- */
 @Component
 public class ConsultarStatusPedidoService {
 

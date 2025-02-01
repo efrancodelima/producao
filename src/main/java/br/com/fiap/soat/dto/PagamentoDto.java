@@ -6,9 +6,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-/**
- * DTO usado na resposta do Service ConultarPagamentoService.
- */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

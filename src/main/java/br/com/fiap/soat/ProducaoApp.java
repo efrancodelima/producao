@@ -4,9 +4,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.metrics.buffering.BufferingApplicationStartup;
 
-/**
- * Classe responsável por iniciar o microsserviço.
- */
 @SpringBootApplication
 public class ProducaoApp {
 

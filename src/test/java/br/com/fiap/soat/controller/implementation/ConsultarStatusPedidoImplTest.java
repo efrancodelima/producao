@@ -1,6 +1,5 @@
 package br.com.fiap.soat.controller.implementation;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
@@ -14,6 +13,7 @@ import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -22,15 +22,16 @@ import org.springframework.http.HttpStatus;
 class ConsultarStatusPedidoImplTest {
 
   AutoCloseable closeable;
-  ConsultarStatusPedidoImpl controller;
 
   @Mock
   ConsultarStatusPedidoService serviceMock;
 
+  @InjectMocks
+  ConsultarStatusPedidoImpl controller;
+
   @BeforeEach
   void setup() {
     closeable = MockitoAnnotations.openMocks(this);
-    this.controller = new ConsultarStatusPedidoImpl(serviceMock);
   }
 
   @AfterEach
@@ -41,33 +42,33 @@ class ConsultarStatusPedidoImplTest {
   @Test
   void deveConsultarStatusPedidoComSucesso() throws Exception {
 
+    // Arrange
     var registros = getListaRegistroProducao();
     doReturn(registros).when(serviceMock).execute(Mockito.any());
 
-    assertDoesNotThrow(() -> {
+    // Act
+    var response = controller.consultarStatus(getListaNumero());
 
-      var response = controller.consultarStatus(getListaNumero());
-
-      assertEquals(HttpStatus.OK.value(), response.getStatusCode().value());
-      assertEquals(registros, response.getBody().getData());
-      assertEquals(null, response.getBody().getErrorMsg());
-    });
+    // Assert
+    assertEquals(HttpStatus.OK.value(), response.getStatusCode().value());
+    assertEquals(registros, response.getBody().getData());
+    assertEquals(null, response.getBody().getErrorMsg());
   }
 
   @Test
-  void deveLancarExcecaoBadRequest() throws Exception {
+  void deveRetornarStatusBadRequest() throws Exception {
 
+    // Arrange
     var excecao = new BadRequestException(BadRequestMessage.NUM_PED_MIN);
     doThrow(excecao).when(serviceMock).execute(Mockito.any());
 
-    assertDoesNotThrow(() -> {
+    // Act
+    var response = controller.consultarStatus(getListaNumero());
 
-      var response = controller.consultarStatus(getListaNumero());
-
-      assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatusCode().value());
-      assertEquals(null, response.getBody().getData());
-      assertEquals(excecao.getMessage(), response.getBody().getErrorMsg());
-    });
+    // Assert
+    assertEquals(HttpStatus.BAD_REQUEST.value(), response.getStatusCode().value());
+    assertEquals(null, response.getBody().getData());
+    assertEquals(excecao.getMessage(), response.getBody().getErrorMsg());
   }
 
   private List<RegistroProducaoJpa> getListaRegistroProducao() {

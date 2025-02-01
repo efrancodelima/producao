@@ -1,8 +1,5 @@
 package br.com.fiap.soat.exception.messages;
 
-/**
- * Mensagens para exceções do tipo Bad Request.
- */
 public enum BadRequestMessage {
     
   NUM_PED_NULL("Informe o número do pedido."),
@@ -18,5 +15,4 @@ public enum BadRequestMessage {
   public String getMessage() {
     return mensagem;
   }
-
 }

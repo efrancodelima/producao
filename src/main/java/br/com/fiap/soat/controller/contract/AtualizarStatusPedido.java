@@ -13,9 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
-/**
- * Interface da API Producao, rota para atualizar o status do pedido.
- */
 @Tag(name = "Producao")
 public interface AtualizarStatusPedido {
 
@@ -61,9 +58,6 @@ public interface AtualizarStatusPedido {
   ResponseEntity<ResponseWrapper<RegistroProducaoJpa>>
       atualizarPedido(@PathVariable("pedido") long numeroPedido);
 
-  /** 
-   * Constantes utilizadas pela interface.
-   */
   final class Constantes {
 
     private Constantes() {}

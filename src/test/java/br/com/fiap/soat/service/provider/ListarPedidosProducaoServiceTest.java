@@ -1,6 +1,5 @@
 package br.com.fiap.soat.service.provider;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doReturn;
 
@@ -13,21 +12,23 @@ import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 class ListarPedidosProducaoServiceTest {
 
   AutoCloseable closeable;
-  ListarPedidosProducaoService service;
 
   @Mock
   RegistroProducaoRepository repositoryMock;
 
+  @InjectMocks
+  ListarPedidosProducaoService service;
+
   @BeforeEach
   void setup() {
     closeable = MockitoAnnotations.openMocks(this);
-    this.service = new ListarPedidosProducaoService(repositoryMock);
   }
 
   @AfterEach
@@ -38,16 +39,31 @@ class ListarPedidosProducaoServiceTest {
   @Test
   void deveListarPedidosProducaoComSucesso() {
 
+    // Arrange
     var registros = getListaRegistrosProducao();
 
     doReturn(registros).when(repositoryMock).findAllWithLatestTimestamp();
-    
 
-    assertDoesNotThrow(() -> {
-      var response = service.execute();
-      assertEquals(registros.size(), response.size());
-      assertEquals(registros.get(0), response.get(0));
-    });
+    // Act
+    var response = service.execute();
+
+    // Assert
+    assertEquals(registros.size(), response.size());
+    assertEquals(registros.get(0), response.get(0));
+  }
+
+  @Test
+  void naodeveLancarExcecaoSeNaoHouverResultados() {
+
+    // Arrange
+    var registros = new ArrayList<RegistroProducaoJpa>();
+    doReturn(registros).when(repositoryMock).findAllWithLatestTimestamp();
+
+    // Act
+    var response = service.execute();
+
+    // Assert
+    assertEquals(0, response.size());
   }
 
   private List<RegistroProducaoJpa> getListaRegistrosProducao() {

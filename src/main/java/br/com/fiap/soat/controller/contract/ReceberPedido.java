@@ -10,7 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 /**
- * Interface da API Producao, rota para receber pedido.
+ * Interface para o controller receber pedido.
+ * Esse controller não é exibido na API do Swagger, pois é um webhook.
  */
 @Tag(name = "Producao")
 public interface ReceberPedido {

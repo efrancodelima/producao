@@ -15,10 +15,12 @@ class NumeroPedidoValidatorTest {
   @Test
   void naoDeveLancarExcecao() {
 
+    // Arrange
     var lista = new ArrayList<Long>();
     lista.add(1L);
     lista.add(2L);
 
+    // Act and assert
     assertDoesNotThrow(() -> {
       NumeroPedidoValidator.validar(lista);
     });
@@ -27,8 +29,10 @@ class NumeroPedidoValidatorTest {
   @Test
   void deveLancarExcecaoQuandoNumeroForNulo() {
 
+    // Arrange
     Long numero = null;
 
+    // Act and assert
     var exception = assertThrows(BadRequestException.class, () -> {
       NumeroPedidoValidator.validar(numero);
     });
@@ -39,8 +43,10 @@ class NumeroPedidoValidatorTest {
   @Test
   void deveLancarExcecaoQuandoListaForNula() {
 
+    // Arrange
     List<Long> lista = null;
 
+    // Act and assert
     var exception = assertThrows(BadRequestException.class, () -> {
       NumeroPedidoValidator.validar(lista);
     });
@@ -51,9 +57,11 @@ class NumeroPedidoValidatorTest {
   @Test
   void deveLancarExcecaoQuandoParametroForMenorQueUm() {
 
+    // Arrange
     var lista = new ArrayList<Long>();
     lista.add(0L);
 
+    // Act and assert
     var exception = assertThrows(BadRequestException.class, () -> {
       NumeroPedidoValidator.validar(lista);
     });

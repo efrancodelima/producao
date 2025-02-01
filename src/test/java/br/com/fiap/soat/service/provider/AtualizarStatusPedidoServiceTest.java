@@ -1,6 +1,5 @@
 package br.com.fiap.soat.service.provider;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
@@ -20,6 +19,7 @@ import java.util.Optional;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
@@ -27,7 +27,6 @@ import org.mockito.MockitoAnnotations;
 class AtualizarStatusPedidoServiceTest {
 
   AutoCloseable closeable;
-  AtualizarStatusPedidoService service;
 
   @Mock
   RegistroProducaoRepository repositoryMock;
@@ -35,10 +34,12 @@ class AtualizarStatusPedidoServiceTest {
   @Mock
   ConsultarPagamentoService servicePagamentoMock;
 
+  @InjectMocks
+  AtualizarStatusPedidoService service;
+
   @BeforeEach
   void setup() {
     closeable = MockitoAnnotations.openMocks(this);
-    this.service = new AtualizarStatusPedidoService(repositoryMock, servicePagamentoMock);
   }
 
   @AfterEach
@@ -47,7 +48,7 @@ class AtualizarStatusPedidoServiceTest {
   }
 
   @Test
-  void deveAtualizarStatusPedidoComSucesso() {
+  void deveAtualizarStatusPedidoComSucesso() throws Exception {
 
     // Arrange
     var registroProducao = getRegistroProducao(StatusPedido.EM_PREPARACAO);
@@ -59,11 +60,11 @@ class AtualizarStatusPedidoServiceTest {
         .when(repositoryMock)
         .save(any(RegistroProducaoJpa.class));
 
-    // Act and assert
-    assertDoesNotThrow(() -> {
-      var response = service.execute(1L);
-      assertEquals(StatusPedido.PRONTO, response.getStatus());
-    });
+    // Act
+    var response = service.execute(1L);
+
+    // Assert
+    assertEquals(StatusPedido.PRONTO, response.getStatus());
   }
 
   @Test

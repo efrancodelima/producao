@@ -14,9 +14,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-/**
- * Interface da API Producao, rota para consultar o status de um ou mais pedidos.
- */
 @Tag(name = "Producao")
 public interface ConsultarStatusPedido {
 
@@ -47,9 +44,6 @@ public interface ConsultarStatusPedido {
   ResponseEntity<ResponseWrapper<List<RegistroProducaoJpa>>>
       consultarStatus(@PathVariable("pedidos") List<Long> numerosPedidos);
 
-  /** 
-   * Constantes utilizadas pela interface.
-   */
   final class Constantes {
 
     private Constantes() {}

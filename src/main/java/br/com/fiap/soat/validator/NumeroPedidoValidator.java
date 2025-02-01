@@ -4,9 +4,6 @@ import br.com.fiap.soat.exception.BadRequestException;
 import br.com.fiap.soat.exception.messages.BadRequestMessage;
 import java.util.List;
 
-/**
- * Classe responsável por validar o número do pedido.
- */
 public class NumeroPedidoValidator {
 
   private NumeroPedidoValidator() {}

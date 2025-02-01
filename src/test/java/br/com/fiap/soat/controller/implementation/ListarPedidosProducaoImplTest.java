@@ -1,6 +1,5 @@
 package br.com.fiap.soat.controller.implementation;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doReturn;
 
@@ -11,6 +10,7 @@ import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
@@ -18,15 +18,16 @@ import org.springframework.http.HttpStatus;
 class ListarPedidosProducaoImplTest {
 
   AutoCloseable closeable;
-  ListarPedidosProducaoImpl controller;
 
   @Mock
   ListarPedidosProducaoService serviceMock;
 
+  @InjectMocks
+  ListarPedidosProducaoImpl controller;
+
   @BeforeEach
   void setup() {
     closeable = MockitoAnnotations.openMocks(this);
-    this.controller = new ListarPedidosProducaoImpl(serviceMock);
   }
 
   @AfterEach
@@ -37,17 +38,18 @@ class ListarPedidosProducaoImplTest {
   @Test
   void deveListarItensProducaoComSucesso() {
 
+    // Arrange
     var lista = getListaRegistrosProducao();
     doReturn(lista).when(serviceMock).execute();
 
-    assertDoesNotThrow(() -> {
+    // Act
+    var response = controller.listarPedidosProducao();
 
-      var response = controller.listarPedidosProducao();
-
-      assertEquals(HttpStatus.OK.value(), response.getStatusCode().value());
-      assertEquals(lista, response.getBody().getData());
-      assertEquals(null, response.getBody().getErrorMsg());
-    });
+    // Assert
+    assertEquals(HttpStatus.OK.value(), response.getStatusCode().value());
+    assertEquals(lista, response.getBody().getData());
+    assertEquals(null, response.getBody().getErrorMsg());
+    
   }
 
   private List<RegistroProducaoJpa> getListaRegistrosProducao() {

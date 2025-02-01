@@ -1,8 +1,5 @@
 package br.com.fiap.soat.exception.messages;
 
-/**
- * Mensagens para exceções do tipo Bad Request.
- */
 public enum BusinessRuleMessage {
     
   PED_RECEBIDO("O pedido já foi recebido."),
@@ -19,5 +16,4 @@ public enum BusinessRuleMessage {
   public String getMessage() {
     return mensagem;
   }
-
 }

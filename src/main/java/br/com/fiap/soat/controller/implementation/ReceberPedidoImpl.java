@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Controlador REST para receber pedido.
- * Esse controler é um webhook usado para receber
+ * Esse controller é um webhook usado para receber
  * as notificações de checkout do sistema de pedidos.
  */
 @RestController

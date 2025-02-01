@@ -11,9 +11,6 @@ import java.time.LocalDateTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-/**
- * Service para registrar o recebimento do pedido.
- */
 @Component
 public class ReceberPedidoService {
 

@@ -12,9 +12,6 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 
-/**
- * Interface da API Producao, rota para listar os itens da esteira de produção.
- */
 @Tag(name = "Producao")
 public interface ListarPedidosProducao {
 
@@ -32,9 +29,6 @@ public interface ListarPedidosProducao {
   
   ResponseEntity<ResponseWrapper<List<RegistroProducaoJpa>>> listarPedidosProducao();
 
-  /** 
-   * Constantes utilizadas pela interface.
-   */
   final class Constantes {
 
     private Constantes() {}
