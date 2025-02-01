@@ -71,15 +71,12 @@ class ConsultarStatusPedidoImplTest {
   }
 
   private List<RegistroProducaoJpa> getListaRegistroProducao() {
-
-    var registroProducao = new RegistroProducaoJpa();
     var lista = new ArrayList<RegistroProducaoJpa>();
-    lista.add(registroProducao);
+    lista.add(new RegistroProducaoJpa());
     return lista;
   }
 
   private List<Long> getListaNumero() {
-
     var lista = new ArrayList<Long>();
     lista.add(1L);
     return lista;

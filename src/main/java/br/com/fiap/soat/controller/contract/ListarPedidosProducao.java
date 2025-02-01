@@ -16,9 +16,9 @@ import org.springframework.web.bind.annotation.GetMapping;
  * Interface da API Producao, rota para listar os itens da esteira de produção.
  */
 @Tag(name = "Producao")
-public interface ListarItensProducao {
+public interface ListarPedidosProducao {
 
-  @Operation(summary = "Listar itens da esteira de produção", description = Constantes.DESCRICAO)
+  @Operation(summary = "Listar pedidos em produção", description = Constantes.DESCRICAO)
 
   @GetMapping(value = "/listar/")
 
@@ -30,7 +30,7 @@ public interface ListarItensProducao {
       examples = @ExampleObject(value = Constantes.EXAMPLE_OK)))
   })
   
-  ResponseEntity<ResponseWrapper<List<RegistroProducaoJpa>>> listarItensProducao();
+  ResponseEntity<ResponseWrapper<List<RegistroProducaoJpa>>> listarPedidosProducao();
 
   /** 
    * Constantes utilizadas pela interface.

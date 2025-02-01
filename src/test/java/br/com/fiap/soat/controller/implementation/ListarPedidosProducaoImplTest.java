@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doReturn;
 
 import br.com.fiap.soat.entity.RegistroProducaoJpa;
-import br.com.fiap.soat.service.provider.ListarItensProducaoService;
+import br.com.fiap.soat.service.provider.ListarPedidosProducaoService;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.AfterEach;
@@ -15,18 +15,18 @@ import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.HttpStatus;
 
-class ListarItensProducaoImplTest {
+class ListarPedidosProducaoImplTest {
 
   AutoCloseable closeable;
-  ListarItensProducaoImpl controller;
+  ListarPedidosProducaoImpl controller;
 
   @Mock
-  ListarItensProducaoService serviceMock;
+  ListarPedidosProducaoService serviceMock;
 
   @BeforeEach
   void setup() {
     closeable = MockitoAnnotations.openMocks(this);
-    this.controller = new ListarItensProducaoImpl(serviceMock);
+    this.controller = new ListarPedidosProducaoImpl(serviceMock);
   }
 
   @AfterEach
@@ -42,7 +42,7 @@ class ListarItensProducaoImplTest {
 
     assertDoesNotThrow(() -> {
 
-      var response = controller.listarItensProducao();
+      var response = controller.listarPedidosProducao();
 
       assertEquals(HttpStatus.OK.value(), response.getStatusCode().value());
       assertEquals(lista, response.getBody().getData());

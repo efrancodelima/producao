@@ -12,12 +12,12 @@ import org.springframework.stereotype.Component;
  * Service para listar os itens de produção.
  */
 @Component
-public class ListarItensProducaoService {
+public class ListarPedidosProducaoService {
 
   private final RegistroProducaoRepository repository;
 
   @Autowired
-  public ListarItensProducaoService(RegistroProducaoRepository repository) {
+  public ListarPedidosProducaoService(RegistroProducaoRepository repository) {
     this.repository = repository;
   }
   
@@ -42,6 +42,10 @@ public class ListarItensProducaoService {
   }
 
   private static void ordenarRegistros(List<RegistroProducaoJpa> registros) {
+
+    if (registros.size() <= 1) {
+      return;
+    }
       
     registros.sort(Comparator
         .comparing((RegistroProducaoJpa r) -> {

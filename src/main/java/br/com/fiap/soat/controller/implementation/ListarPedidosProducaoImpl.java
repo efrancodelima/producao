@@ -1,9 +1,9 @@
 package br.com.fiap.soat.controller.implementation;
 
-import br.com.fiap.soat.controller.contract.ListarItensProducao;
+import br.com.fiap.soat.controller.contract.ListarPedidosProducao;
 import br.com.fiap.soat.controller.wrapper.ResponseWrapper;
 import br.com.fiap.soat.entity.RegistroProducaoJpa;
-import br.com.fiap.soat.service.provider.ListarItensProducaoService;
+import br.com.fiap.soat.service.provider.ListarPedidosProducaoService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,17 +16,17 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/producao")
-public class ListarItensProducaoImpl implements ListarItensProducao {
+public class ListarPedidosProducaoImpl implements ListarPedidosProducao {
 
-  private final ListarItensProducaoService service;
+  private final ListarPedidosProducaoService service;
 
   @Autowired
-  public ListarItensProducaoImpl(ListarItensProducaoService service) {
+  public ListarPedidosProducaoImpl(ListarPedidosProducaoService service) {
     this.service = service;
   }
 
   @Override
-  public ResponseEntity<ResponseWrapper<List<RegistroProducaoJpa>>> listarItensProducao() {
+  public ResponseEntity<ResponseWrapper<List<RegistroProducaoJpa>>> listarPedidosProducao() {
     var listaItens = service.execute();
     return ResponseEntity.status(HttpStatus.OK).body(new ResponseWrapper<>(listaItens));
   }
