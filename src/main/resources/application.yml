@@ -31,8 +31,8 @@ spring:
       on-profile: local
   datasource:
     url: jdbc:h2:mem:testdb
-    username: sa
-    password: password
+    username: ${H2_USERNAME}
+    password: ${H2_PASSWORD}
     driverClassName: org.h2.Driver
   h2:
     console:
