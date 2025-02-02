@@ -63,7 +63,7 @@ class ConsultarPagamentoServiceTest {
   }
 
   @Test
-  void deveLancarExcecaoSeCorpoRespostaForNulo() {
+  void deveLancarExcecaoSeBodyForNulo() {
 
     // Arrange
     var response = ResponseEntity.ok(null);
@@ -78,7 +78,7 @@ class ConsultarPagamentoServiceTest {
   }
 
   @Test
-  void deveLancarExcecaoSeDadosRespostaForNulo() throws Exception {
+  void deveLancarExcecaoSeBodyDataForNulo() throws Exception {
 
     // Arrange
     var response = ResponseEntity.ok(new ResponseWrapper<>(null, null));
@@ -93,7 +93,7 @@ class ConsultarPagamentoServiceTest {
   }
 
   @Test
-  void devePassarExcecaoRecebida() {
+  void deveEncapsularExcecaoRecebida() {
 
     // Arrange
     var msgExcecao = "Uma mensagem qualquer.";
