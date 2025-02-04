@@ -28,15 +28,16 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven
 
+      - name: Start Application
+        env:
+          H2_USERNAME: sa
+          H2_PASSWORD: password
+        run: nohup mvn spring-boot:run -Dspring-boot.run.profiles=test &
+
       - name: Build with Maven
         env:
           JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.13-11/x64
         run: mvn clean install
-
-      - name: Run tests
-        env:
-          JAVA_HOME: /opt/hostedtoolcache/Java_Temurin-Hotspot_jdk/17.0.13-11/x64
-        run: mvn test
 
       - name: Cache SonarQube packages
         uses: actions/cache@v4
