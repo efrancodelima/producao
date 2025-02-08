@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Endpoint URL
-URL="http://localhost:8080/"
+URL="http://localhost:8082/"
 
 # Tempo limite em segundos
 TIMEOUT=60
