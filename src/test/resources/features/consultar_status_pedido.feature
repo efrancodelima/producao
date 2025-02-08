@@ -1,8 +1,8 @@
 # language: pt
 
-Funcionalidade: Fazer checkout
+Funcionalidade: Consultar status do pedido
 
-  Cenário: Cliente faz checkout do pedido
-    Dado que o cliente possui um pedido
-    Quando o pedido for enviado para checkout
-    Então o sistema deve devolver o status do pedido como recebido
+  Cenário: Usuário consulta o status de um pedido
+    Dado que existe um pedido pronto na esteira de produção
+    Quando o sistema receber uma consulta sobre o status do pedido
+    Então o sistema deve retornar o status pronto
