@@ -74,7 +74,7 @@ jobs:
           DATASOURCE_USERNAME: ${{ secrets.DATASOURCE_USERNAME }}
           DATASOURCE_PASSWORD: ${{ secrets.DATASOURCE_PASSWORD }}
           DATASOURCE_DRIVER: ${{ secrets.DATASOURCE_DRIVER }}
-        run: docker build -t app-lanchonete -f Dockerfile .
+        run: docker build -t app-producao -f Dockerfile .
 
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
@@ -100,5 +100,5 @@ jobs:
         if: always() && env.LOGIN_ECR == 'true'
         run: docker logout ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com
 
-      - name: Deploy on Amazon ECS
-        run: ./s4-ecs-deploy.sh
+      # - name: Deploy on Amazon ECS
+      #   run: ./s4-ecs-deploy.sh
