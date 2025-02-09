@@ -26,7 +26,7 @@ public class ConsultarPagamentoService {
   
   public PagamentoDto execute(Long numeroPedido) throws BadGatewayException {
     
-    String url = "http://localhost:8081/pagamento/consultar/" + numeroPedido;
+    String url = "http://44.195.69.39:8081/pagamento/consultar/" + numeroPedido;
 
     try {
       var response = restTemplate.exchange(
