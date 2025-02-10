@@ -20,7 +20,7 @@ public class SwaggerConfig {
         .info(new Info()
             .title("Documentação da API")
             .version("2.0")
-            .description("Documentação da API do microsservico de PRODUCAO (visão da cozinha)"
+            .description("Documentação da API do microsservico de PRODUCAO"
                 + "<br>FIAP | Pós-tech | Software Architecture | Tech Challenge | Fase 4"))
             .addTagsItem(tagProducao);
   }
